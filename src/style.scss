@@ -1,0 +1,407 @@
+$playSize: 72px;
+$green: #18B346;
+$gray: #333333;
+
+body {
+  padding: 0;
+  margin: 0;
+  background: white;
+  font-family: 'SB Sans Interface';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  box-sizing: border-box;
+}
+.centerCol{
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.header{
+  height: 751px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 117px 109px;
+  color:white;
+  box-sizing: border-box;
+  position: relative;
+
+}
+h1{
+  /* Group 321 */
+
+  /* ExtraBig */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 60px;
+  /* or 136% */
+
+  color: #FFFFFF;
+
+
+}
+.headerMenu{
+  position: absolute;
+  bottom: 109px;
+  font-size: 16px;
+  line-height: 55px;
+  /* or 162% */
+}
+
+.headerMenuItem{
+  color:#9C9FA6;
+  text-decoration-line: underline;
+  cursor: pointer;
+  transition: color .2s ;
+}
+.headerMenuItem:hover{
+  color:#ffffff;
+
+}
+.descr{
+  padding: 14px 109px;
+  box-sizing: border-box;
+  display: flex;
+  font-size: 16px;
+  line-height: 24px;
+  color: #33363A;
+  max-width: 1000px;
+}
+.descrBlock{
+  width: 50%;
+  box-sizing: border-box;
+  padding-right: 50px;
+}
+.descrBlockText{
+  margin-bottom: 24px;
+}
+.section{
+  padding: 100px 109px 0 100px;
+}
+.sectionBgGray{
+  background-color: #F5F5F5;
+  padding-bottom: 80px;
+}
+.sectionTitle{
+  font-size: 44px;
+  line-height: 60px;color: #131313;
+  font-weight: bold;
+}
+.trItem{
+  margin: 40px 0;
+  display: flex;
+  align-items: flex-end;
+}
+.trItemImage{
+  height: 480px;
+  width: 696px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.trItemDescr{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  padding-left: 36px;
+}
+.trItemDescrSpeakers{
+
+}
+.trItemDescrModerators{
+  font-weight: 400;
+  padding-top: 40px;
+}
+.trItemImageTime{
+  position: absolute;
+  padding: 12px;
+  background-color: white;
+  border-radius: 4px;
+  color:#33363A;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: bold;
+  top:40px;
+  left: 50px;
+}
+.trItemImagePlay{
+  position: absolute;
+  left: 50px;
+  top:calc(50% -  (72px / 2));
+  width:72px;
+
+}
+.trItemImageText{
+  position: absolute;
+  top:calc(50% - 12px);
+  left: 160px;
+  width: calc(100% - 160px - 100px);
+  height: 50%;
+  overflow-y: hidden;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 40px;
+  color: #FFFFFF;
+}
+.online svg circle{
+  fill:$green;
+}
+.trItemImageTime.online{
+  background-color: $green;
+}
+
+.ended svg circle{
+  fill:$gray;
+}
+.ended svg path{
+  fill:#F2F2F2;
+}
+.trItemImageTime.ended{
+  background-color: $gray;
+  color:#F2F2F2;
+}
+
+.footer{
+  background-color: #ffffff;
+  padding: 100px 109px 0 100px;
+}
+.footerTitle{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: #9C9FA6;
+  margin-bottom: 31px;
+}
+.footerTitle span{
+  border-bottom: 1px solid #E7E7E7;
+  height: 0px;
+  width: 30%;
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-left: 1em;
+}
+.footerAddress{
+  /* 43581, Московская обл., Истринский р-н, д. Аносино, ул. Университетская, вл. 11 */
+
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+
+
+  color: #33363A;
+  margin-bottom: 31px;
+
+}
+.footerMap{
+  /* Показать на карте */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  /* identical to box height, or 200% */
+
+  color: #131313;
+  cursor:pointer;
+  margin-bottom: 31px;
+}
+.footerMapText{
+  text-decoration-line: underline;
+}
+.footerCopyRight{
+  /* © 2012–2019 АНО ДПО «Корпоративный университет Сбербанка» Лицензия на осуществление образовательной деятельности от 2 апреля 2014 года. Регистрационный номер — 034970. */
+
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 11px;
+  /* identical to box height, or 164% */
+
+  color: #B7B7B7;
+  margin-bottom: 80px;
+
+}
+@media only screen and (max-width: 1000px){
+
+  .centerCol {
+    width: 100%;
+  }
+  .header{
+    padding: 50px 40px;
+    height: auto;
+  }
+  h1{
+    /* Group 322 */
+  max-width: 600px;
+   margin: 0;
+    font-weight: bold;
+    font-size: 44px;
+    line-height: 60px;
+    /* or 136% */
+
+    color: #FFFFFF;
+
+
+  }
+  .headerMenu{
+    position: initial;
+    margin-top: 40px;
+  }
+  .descr{
+    display: block;
+    margin-bottom: 24px;
+    padding: 14px 40px;
+  }
+  .descrBlock{
+    width: 100%;
+  }
+  .section {
+    padding: 0px 40px 0 40px;
+  }
+  .trItem{
+    display: block;
+  }
+  .trItemImage{
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+  }
+  .trItemDescr{
+    padding: 40px 0 40px 0;
+  }
+  .footer {
+    padding: 40px 40px 0 40px;
+  }
+  .trItemImageText{
+
+    font-size: 28px;
+    line-height: 35px;
+
+  }
+
+}
+@media only screen and (max-width: 640px) {
+  .centerCol {
+    width: 100%;
+  }
+  .header{
+    padding: 50px 20px;
+    height: auto;
+  }
+  h1{
+    /* Group 322 */
+    max-width: 600px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    /* or 136% */
+
+    color: #FFFFFF;
+
+
+  }
+
+  .headerMenu{
+    position: initial;
+    margin-top: 40px;
+  }
+  .headerMenuItem{
+    line-height: 33px;
+  }
+  .descr{
+    display: block;
+    margin-bottom: 24px;
+    padding: 14px 20px;
+  }
+  .descrBlock{
+    width: 100%;
+  }
+  .section {
+    padding: 0px 20px 0 20px;
+  }
+  .sectionTitle{
+    font-size: 26px;
+    line-height: 28px;
+  }
+  .trItem{
+    display: block;
+  }
+  .trItemImage{
+    width: 100%;
+    padding-bottom: 20px;
+    height: auto;
+    padding-top: 20px;
+  }
+  .trItemImageTime{
+    position: inherit;
+    padding: 12px;
+    margin: 20px;
+    margin-top: 0;
+    height: auto;
+    width: -moz-max-content;
+    width: max-content;
+    top: unset;
+    left: unset;
+  }
+  .trItemImagePlay{
+    position: inherit;
+    margin: 20px;
+    margin-top: 100px;
+    width: -moz-max-content;
+    width: max-content;
+    top: unset;
+    left: unset;
+    height: auto;
+  }
+  .trItemImageText{
+    position: inherit;
+    font-size: 20px;
+    line-height: 28px;
+    margin: 20px;
+    width:calc(100% - 40px);
+    top: unset;
+    left: unset;
+    height: auto;
+  }
+  .trItemDescr{
+    padding: 20px 0 20px 0;
+  }
+  .footer {
+    padding: 20px 40px 0 20px;
+  }
+}
+
+
+
+
+
+
+
+
+/* Панельная дискуссия: Расширение границ пользовательского  опыта обучения: кейс КУ Сбербанка” */
+
+
+
+
+
+
+
+
+
+
+
+
+

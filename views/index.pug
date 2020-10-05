@@ -1,0 +1,77 @@
+extends layout
+
+block head
+  script(src='/js/bundle.js')
+block content
+  .centerCol
+    .header
+      h1 !{lang.title}
+      .headerMenu
+        each val in lang.menu
+          .headerMenuItem(onclick="window.open('"+val.link+"')") !{val.title}
+    .descr
+      each block in lang.descr
+        .descrBlock
+          each text in block
+            .descrBlockText #{text}
+    .section
+      .sectionTitle #{lang.sections[0]}
+        each item in [1,2,3,4]
+          .trItem
+            .trItemImage(style="background-image:url(/img/tmp.svg)")
+              if item!=1
+                .trItemImageTime 12:00 - 13:30
+
+              else
+                .trItemImageTime.online #{lang.online}
+                .trItemImagePlay.online
+                    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="36" cy="36" r="36" fill="#F2F2F2"/>
+                    <path d="M32.0329 46.8734C30.0818 48.0499 28.5 47.0861 28.5 44.7224V27.2792C28.5 24.9132 30.0818 23.9506 32.0329 25.126L46.5362 33.8696C48.4879 35.0465 48.4879 36.9533 46.5362 38.1299L32.0329 46.8734Z" fill="#33363A"/>
+                    </svg>
+
+              .trItemImageText Панельная дискуссия: Расширение границ пользовательского  опыта обучения: кейс КУ Сбербанка”
+
+            .trItemDescr
+              .trItemDescrSpeakers
+                .trItemDescrSpeakersTitle #{lang.SpeakersTitle}
+                  each item in [1,2,3,4]
+                    .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
+              .trItemDescrModerators
+                .trItemDescrModeratorsTitle #{lang.ModeratorTitle}
+                  .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
+
+    .section.sectionBgGray
+      .sectionTitle #{lang.sections[1]}
+        each item in [1,2,3,4]
+          .trItem
+            .trItemImage(style="background-image:url(/img/tmp.svg)")
+              .trItemImageTime.ended #{lang.ended}
+              .trItemImagePlay.ended
+                  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="36" cy="36" r="36" fill="#F2F2F2"/>
+                  <path d="M32.0329 46.8734C30.0818 48.0499 28.5 47.0861 28.5 44.7224V27.2792C28.5 24.9132 30.0818 23.9506 32.0329 25.126L46.5362 33.8696C48.4879 35.0465 48.4879 36.9533 46.5362 38.1299L32.0329 46.8734Z" fill="#33363A"/>
+                  </svg>
+              .trItemImageText Панельная дискуссия: Расширение границ пользовательского  опыта обучения: кейс КУ Сбербанка”
+            .trItemDescr
+              .trItemDescrSpeakers
+                .trItemDescrSpeakersTitle #{lang.SpeakersTitle}
+                  each item in [1,2,3,4]
+                    .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
+              .trItemDescrModerators
+                .trItemDescrModeratorsTitle #{lang.ModeratorTitle}
+                  .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
+    .footer
+      .footerTitle #{lang.footerTitle}
+        span
+      .footerAddress #{lang.footerAddress}
+      .footerMap(onclick="window.open('https://goo.gl/maps/nrm9ARpEp8FkDutu7')")
+        span.footerMapText #{lang.footerMap}
+        span &nbsp;&nbsp;
+        span
+          <svg width="19" height="13" viewBox="0 0 19 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.7944 0.195511C12.5355 -0.0651703 12.1047 -0.0651703 11.8368 0.195511C11.578 0.447385 11.578 0.866588 11.8368 1.11788L16.6921 5.84243L0.67034 5.84243C0.296856 5.84301 0 6.13188 0 6.4953C0 6.85873 0.296856 7.15699 0.67034 7.15699L16.6921 7.15699L11.8368 11.8727C11.578 12.1334 11.578 12.5532 11.8368 12.8045C12.1047 13.0652 12.5361 13.0652 12.7944 12.8045L18.7991 6.96148C19.067 6.7096 19.067 6.2904 18.7991 6.03911L12.7944 0.195511Z" fill="#33363A"/>
+          </svg>
+
+      .footerCopyRight #{lang.footerCopyRight}
+
