@@ -134,13 +134,16 @@ h1{
 
 .trItemDescr{
   font-style: normal;
-  font-weight: 600;
+  //font-weight: 600;
   font-size: 18px;
   line-height: 28px;
   padding-left: 36px;
 }
+.trItemDescrSpeakersTitleHead{
+  font-weight: bold;
+}
 .trItemDescrSpeakers{
-
+font-weight: normal;
 }
 .trItemDescrModerators{
   font-weight: 400;

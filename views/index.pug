@@ -51,11 +51,13 @@ block content
 
               .trItemDescr
                 .trItemDescrSpeakers
-                  .trItemDescrSpeakersTitle #{lang.SpeakersTitle}
+                  .trItemDescrSpeakersTitle
+                    .trItemDescrSpeakersTitleHead #{lang.SpeakersTitle}
                     each item in [1,2,3,4]
                       .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
                 .trItemDescrModerators
-                  .trItemDescrModeratorsTitle #{lang.ModeratorTitle}
+                  .trItemDescrModeratorsTitle
+                    .trItemDescrSpeakersTitleHead #{lang.ModeratorTitle}
                     .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
     .BgGray
       .headerBox
@@ -73,12 +75,13 @@ block content
                   .trItemImageText Панельная дискуссия: Расширение границ пользовательского  опыта обучения: кейс КУ Сбербанка”
                 .trItemDescr
                   .trItemDescrSpeakers
-                    .trItemDescrSpeakersTitle #{lang.SpeakersTitle}
-                      each item in [1,2,3,4]
+                    .trItemDescrSpeakersTitleHead #{lang.SpeakersTitle}
+                    each item in [1,2,3,4]
                         .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
                   .trItemDescrModerators
-                    .trItemDescrModeratorsTitle #{lang.ModeratorTitle}
-                      .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
+                    .trItemDescrModeratorsTitle
+                    .trItemDescrSpeakersTitleHead #{lang.ModeratorTitle}
+                    .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
     .headerBox
       .footer
         .footerTitle #{lang.footerTitle}
