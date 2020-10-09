@@ -1,0 +1,15 @@
+extends layout
+
+block head
+block content
+  div(style="width:100%; height:100vh;display: flex;align-items: center;justify-content: center;")
+    form(method="POST")
+      .loginctrl
+        input(id="uName" placeholder="User name" name="user")
+      .loginctrl
+        input(type="password" placeholder="password" name="pass")
+      .loginctrl
+        input(type="submit" value="Log in")
+
+  script.
+    document.getElementById("uName").focus();

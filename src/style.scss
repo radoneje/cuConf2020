@@ -1,12 +1,14 @@
 $playSize: 72px;
-$green: #18B346;
+$green: #18b346;
 $gray: #333333;
 
 body {
+
+  //opacity: 1 !important;
   padding: 0;
   margin: 0;
   background: white;
-  font-family: 'SB Sans Interface';
+  font-family: 'SB Sans Text' ,Arial,sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -15,19 +17,27 @@ body {
 }
 .centerCol{
   width: 100%;
-  max-width: 1440px;
+  //max-width: 1440px;
   margin: 0 auto;
 }
-.header{
-  height: 751px;
-  width: 100%;
+.headerRow{
   background-repeat: no-repeat;
   background-size: cover;
+}
+.headerBox{
+  max-width: 1440px;
+  margin:0  auto;
+}
+.header{
+  //height: 751px;
+  min-height: 100vh;
+  width: 100%;
+
   padding: 117px 109px;
   color:white;
   box-sizing: border-box;
   position: relative;
-
+  padding-top: 80px;
 }
 h1{
   /* Group 321 */
@@ -50,7 +60,19 @@ h1{
   line-height: 55px;
   /* or 162% */
 }
+.logoBox{
+  display: flex;
+  margin-bottom: 80px;
+}
+.logo{
+  height: 40px;
+  margin-right: 40px;
+}
+.logo img{
+  height:100%;
+  width:auto;
 
+}
 .headerMenuItem{
   color:#9C9FA6;
   text-decoration-line: underline;
@@ -62,6 +84,7 @@ h1{
 
 }
 .descr{
+  margin-top: 80px;
   padding: 14px 109px;
   box-sizing: border-box;
   display: flex;
@@ -81,8 +104,12 @@ h1{
 .section{
   padding: 100px 109px 0 100px;
 }
-.sectionBgGray{
+.BgGray{
   background-color: #F5F5F5;
+
+}
+.sectionBgGray{
+
   padding-bottom: 80px;
 }
 .sectionTitle{
@@ -156,6 +183,7 @@ h1{
 }
 .trItemImageTime.online{
   background-color: $green;
+  color: white;
 }
 
 .ended svg circle{
@@ -233,7 +261,8 @@ h1{
   margin-bottom: 80px;
 
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1024px){
+
 
   .centerCol {
     width: 100%;
@@ -247,8 +276,8 @@ h1{
   max-width: 600px;
    margin: 0;
     font-weight: bold;
-    font-size: 44px;
-    line-height: 60px;
+    font-size: 24px;
+    line-height: 30px;
     /* or 136% */
 
     color: #FFFFFF;
@@ -256,10 +285,11 @@ h1{
 
   }
   .headerMenu{
-    position: initial;
+
     margin-top: 40px;
   }
   .descr{
+
     display: block;
     margin-bottom: 24px;
     padding: 14px 40px;
@@ -268,7 +298,7 @@ h1{
     width: 100%;
   }
   .section {
-    padding: 0px 40px 0 40px;
+    padding: 40px 40px 0 40px;
   }
   .trItem{
     display: block;
@@ -288,16 +318,33 @@ h1{
 
     font-size: 28px;
     line-height: 35px;
-
+    top: calc( 40px);
+    height: calc(100% - 80px);
+  }
+  .sectionTitle{
+    font-size: 26px;
+    line-height: 28px;
   }
 
 }
 @media only screen and (max-width: 640px) {
+
+  .logoBox{
+    display: block;
+    margin-bottom: 40px;
+  }
+  .logo{
+    display: inline-block;
+    height: 30px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+  }
   .centerCol {
     width: 100%;
   }
   .header{
     padding: 50px 20px;
+    padding-top: 40px;
     height: auto;
   }
   h1{
@@ -322,15 +369,17 @@ h1{
     line-height: 33px;
   }
   .descr{
+
     display: block;
     margin-bottom: 24px;
     padding: 14px 20px;
+
   }
   .descrBlock{
     width: 100%;
   }
   .section {
-    padding: 0px 20px 0 20px;
+    padding: 40px 20px 0 20px;
   }
   .sectionTitle{
     font-size: 26px;

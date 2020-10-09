@@ -1,0 +1,109 @@
+extends layout
+
+block head
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  script(src="/bootstrap-vue.js")
+  <link rel="stylesheet" href="/bootstrap-vue.css"/>
+  <link rel="stylesheet" href="/adminStyle.css"/>
+block content
+  h1 ADMIN
+
+  div#app
+    b-container
+      button.btn.btn-sm.btn-success(v-on:click="sessAdd()") Добавить cсессию
+      b-card.mt-3(v-for="session in sessions")
+        .btn-group
+          .btn.btn-sm(v-on:click="changeStatus(session, 0)"  v-bind:class="{'btn-warning':(session.status==0),'btn-outline-secondary':(session.status!=0)}") черновик
+          .btn.btn-sm(v-on:click="changeStatus(session, 1)"  v-bind:class="{'btn-warning':(session.status==1),'btn-outline-secondary':(session.status!=1)}") план
+          .btn.btn-sm(v-on:click="changeStatus(session, 2)"  v-bind:class="{'btn-warning':(session.status==2),'btn-outline-secondary':(session.status!=2)}") в эфире
+          .btn.btn-sm(v-on:click="changeStatus(session, 3)"  v-bind:class="{'btn-warning':(session.status==3),'btn-outline-secondary':(session.status!=3)}") завершено
+        .d-flex.mt-3.flex-row.bd-highlight
+          .p-2.w-50.bd-highlight
+            input.form-control(v-model="session.titleru" v-on:change="updateSession(session)" placeholder="Название сессии")
+          .p-2.w-50.bd-highlight
+            input.form-control(v-model="session.titleen" v-on:change="updateSession(session)" placeholder="Session Title")
+
+
+        .d-flex.mt-3.flex-row.bd-highlight
+          .p-2.w-25.bd-highlight
+            b-form(inline)
+              input.form-control.w-50(:value="getDate(session)" v-on:change="changeDate(session, $event)" placeholder="Дата начала ДД")
+              //input.form-control.w-50(:value="getTime(session)" v-on:change="changeTime(session, $event)" placeholder="Время начала ЧЧ:MM")
+              input.form-control.w-50(:value="getTime(session)" v-on:change="changeTime(session, $event)" placeholder="Время начала ЧЧ:MM")
+            //img.img-thumbnail(src="/img/tmp.svg")
+            div(style="width:250px; height:200px; background-size: cover; border-radius: 4px;" v-bind:style="{'background-image':'url('+session.img+')'}")
+            button.btn.btn-primary.btn-block(v-on:click="changeImage(session)")  Изменить картинку
+          .p-2.w-75.bd-highlight
+            h5
+              .badge.badge-success(v-on:click="addSpeaker(session)" style="cursor:pointer") Добавить спикера
+            div(v-for="speaker in session.speakers")
+              div.p-1
+                div
+                  span
+                    div( v-bind:style="{'background-image':'url('+speaker.img+')'}" style="float:left;width:30px; height:30px; background-size: contain;background-position: center;background-repeat: no-repeat;border-radius: 50%;")
+                  span {{speaker.nameru}}
+                  span &nbsp;
+                  span {{speaker.positionru}}
+                  span &nbsp;
+                  span
+                    .badge.badge-success.mr-3(v-on:click="upSpeakerFromSession(session, speaker)" style="cursor:pointer") Up
+                  span
+                    .badge.badge-danger(v-on:click="deleteSpeakerFromSession(session, speaker)" style="cursor:pointer") X
+                  div(style="clear:both")
+            h5.mt-3  &nbsp;
+              .badge.badge-success(v-on:click="addModerator(session)" style="cursor:pointer") Добавить модератора
+            div(v-for="speaker in session.moderators")
+              div.p-1
+                div
+                  span
+                    div( v-bind:style="{'background-image':'url('+speaker.img+')'}" style="float:left;width:30px; height:30px; background-size: contain;background-position: center;background-repeat: no-repeat;border-radius: 50%;")
+                  span {{speaker.nameru}}
+                  span &nbsp;
+                  span {{speaker.positionru}}
+                  span &nbsp;
+                  span
+                    .badge.badge-success.mr-3(v-on:click="upModeratorFromSession(session, speaker)" style="cursor:pointer") Up
+                  span
+                    .badge.badge-danger(v-on:click="deleteModeratorFromSession(session, speaker)" style="cursor:pointer") X
+                  div(style="clear:both")
+        .d-flex.mt-3.flex-row.bd-highlight
+          .p-2.w-50.bd-highlight
+            input.form-control(v-model="session.ytru" v-on:change="updateSession(session)" placeholder="YouTube русский")
+          .p-2.w-50.bd-highlight
+            input.form-control(v-model="session.yten" v-on:change="updateSession(session)" placeholder="YouTube eng")
+    b-modal(id="spaekersDialog" hide-footer size="xl")
+      template(v-slot:modal-title) Выберите спикера
+      .d-block
+        .SpeakerList
+          div(v-for="speaker in speakers")
+            .d-flex.mb-2.mt-3
+              .w-50
+                div(v-on:click="changeListSpeakerAvatar(speaker)" v-bind:style="{'background-image':'url('+speaker.img+')'}" style="float: left;display: inline-block;margin-right: 1em;;width:60px; height:60px; background-size: contain;background-position: center;background-repeat: no-repeat;border-radius: 50%;cursor:pointer")
+              .w-50
+                b-button-group(size="sm")
+                  b-button.btn(variant="success" v-on:click="selectSpeakerFromList(speaker)" ) Выбрать
+                  b-button(variant="danger" v-on:click="deleteSpeakerFromList(speaker)") X
+            .d-flex.mb-2
+                input.form-control.w-50(v-on:change="changeListSpeaker(speaker)" placeholder="ФИО" v-model="speaker.nameru" style="border:0")
+                input.form-control.w-50(v-on:change="changeListSpeaker(speaker)" placeholder="Name" v-model="speaker.nameen" style="border:0")
+            .d-flex.mb-2.pb-1(style=" border-bottom: 1px solid gray;")
+              textarea.form-control.w-50(v-on:change="changeListSpeaker(speaker)" placeholder="Должность" v-model="speaker.positionru" style="border:0")
+              textarea.form-control.w-50(v-on:change="changeListSpeaker(speaker)"  placeholder="Position" v-model="speaker.positionen" style="border:0")
+
+      .d-block.mt-5
+        .h4 Новый спикер
+        .d-flex.mb-2
+          div(v-on:click="addSpeakerAvatar()" v-bind:style="{'background-image':'url('+newSpeaker.img+')'}" style="width:30px; height:30px; background-size: contain;background-position: center;background-repeat: no-repeat;border-radius: 50%;cursor:pointer")
+        .d-flex.mb-2
+              input.form-control.w-50(placeholder="ФИО" v-model="newSpeaker.nameru")
+              input.form-control.w-50(placeholder="Name" v-model="newSpeaker.nameen")
+        .d-flex.mb-2
+          textarea.form-control.w-50(placeholder="Должность" v-model="newSpeaker.positionru")
+          textarea.form-control.w-50(placeholder="Position" v-model="newSpeaker.positionen")
+        .d-flex.mb-2
+          .w-50
+          .btn.btn-sm.w-50.btn-success(v-on:click="addNewSpeaker()") Добавить
+
+
+  script(src='/js/admin.js')

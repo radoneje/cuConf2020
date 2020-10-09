@@ -6,10 +6,10 @@
         "link": "https://conference.sberbank-university.ru/"
       },
       {"title": "Программа конференции",
-        "link": "https://conference.sberbank-university.ru/"
+        "link": "https://sberbank-university.ru/edutech-club/events/3039/#main-program"
       },
       {"title": "Выставка EduTech компаний",
-        "link": "https://conference.sberbank-university.ru/"
+        "link": "https://sberbank-university.ru/edutech-club/events/3039/#dev-tool\n"
       }
     ],
     "descr": {
@@ -30,8 +30,8 @@
     ],
     "SpeakersTitle": "Спикеры:",
     "ModeratorTitle": "Модератор:",
-    "online":"онлайн",
-    "ended":"запись",
+    "online":"Онлайн",
+    "ended":"Запись",
     "footerTitle": "НАШ АДРЕС",
     "footerAddress": "43581, Московская обл., Истринский р-н, д. Аносино, ул. Университетская, вл. 11",
     "footerMap": "Показать на карте",

@@ -3,19 +3,46 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-
+var config = require('./config.json')
+var session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const pgStoreConfig = {conObject: config.pgConnection}
+var  fileUpload=require('express-fileupload')
+var knex = require('knex')({
+  client: 'pg',
+  version: '7.2',
+  connection:config.pgConnection
+});
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 
 var app = express();
+
+app.use(session({
+  secret: (config.sha256Secret),
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 1 * 24 * 60 * 60 * 1000 }, // 1 days
+  store:new pgSession(pgStoreConfig),
+}));
+app.use(fileUpload({
+  limits: { fileSize: 100 * 1024 * 1024 },
+  useTempFiles : true,
+  tempFileDir : path.join(__dirname, 'public/files'),
+  safeFileNames: true
+}));
+
+
+
 console.log(path.resolve(__dirname, 'src/js'))
 
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use("/", (req,res, next)=>{req.knex=knex;next();});
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,7 +56,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
