@@ -1,5 +1,6 @@
 {
   "rus": {
+    "mainLogo": "https://sberbank-university.ru/local/templates/main/src/assets/img/sber-logo-ru-light.svg",
     "langTitle": "ru",
     "langId": "rus",
     "anotherLangTitle":"English",
@@ -42,6 +43,7 @@
     "footerCopyRight": "© 2012–2020 АНО ДПО «Корпоративный университет Сбербанка» Лицензия на осуществление образовательной деятельности от 2 апреля 2014 года. Регистрационный номер — 034970."
   },
   "eng": {
+    "mainLogo": "https://sberbank-university.ru/local/templates/main/src/assets/img/sber-logo-en-light.svg",
     "langTitle": "en",
     "langId": "en",
     "anotherLangTitle":"Russian",
