@@ -1,15 +1,61 @@
 {
   "rus": {
+    "langTitle": "ru",
+    "langId": "rus",
+    "anotherLangTitle":"en",
+    "anotherLangId":"eng",
     "title":"V Международная конференция<br/>«Больше чем обучение:<br/>вызовы новой нормальности» <br/>23 октября 2020",
     "menu": [
       {"title": "Спикеры конференции",
-        "link": "https://conference.sberbank-university.ru/"
+        "link": "https://sberbank-university.ru/edutech-club/events/3039/#teachers"
       },
       {"title": "Программа конференции",
         "link": "https://sberbank-university.ru/edutech-club/events/3039/#main-program"
       },
-      {"title": "Выставка EduTech компаний",
-        "link": "https://sberbank-university.ru/edutech-club/events/3039/#dev-tool\n"
+      {"title": "Выставка Edu-Tech компаний",
+        "link": "https://sberbank-university.ru/edutech-club/events/3039/#dev-tool"
+      }
+    ],
+    "descr": {
+      "block0": [
+        "Вызовы, появившиеся во время пандемии, открыли новые возможности для обучения и привели к вынужденной трансформации образовательных программ. ",
+        "Важно ли в новой реальности продолжать обучение?",
+        "Как развивать стойких лидеров и перепрофилировать специалистов в разгар кризиса?",
+        "Можно ли сократить затраты, не потеряв на качестве обучения?"
+      ],
+      "block1": [
+        "Эти и другие актуальные вопросы обсудят руководители крупнейших российских и международных компаний и корпоративных университетов, ректоры передовых университетов и бизнес-школ мира, а также ведущие эксперты в сфере образования на главное образовательной конференции в области L&D.",
+        "Конференция организована совместно с Европейским фондом развития менеджмента (EFMD) при участии Благотворительного фонда Сбербанка «Вклад в будущее»."
+      ]
+    },
+    "sections": [
+      "Прямая трансляция",
+      "Завершенные трансляции"
+    ],
+    "SpeakersTitle": "Спикеры:",
+    "ModeratorTitle": "Модератор:",
+    "online":"Онлайн",
+    "ended":"Запись",
+    "footerTitle": "НАШ АДРЕС",
+    "footerAddress": "43581, Московская обл., Истринский р-н, д. Аносино, ул. Университетская, вл. 11",
+    "footerMap": "Показать на карте",
+    "footerCopyRight": "© 2012–2020 АНО ДПО «Корпоративный университет Сбербанка» Лицензия на осуществление образовательной деятельности от 2 апреля 2014 года. Регистрационный номер — 034970."
+  },
+  "eng": {
+    "langTitle": "en",
+    "langId": "en",
+    "anotherLangTitle":"ru",
+    "anotherLangId":"rus",
+    "title":"V Международная конференция<br/>«Больше чем обучение:<br/>вызовы новой нормальности» <br/>23 октября 2020",
+    "menu": [
+      {"title": "Спикеры конференции",
+        "link": "https://sberbank-university.ru/en/edutech-club/events/3087/#teachers"
+      },
+      {"title": "Программа конференции",
+        "link": "https://sberbank-university.ru/edutech-club/events/3039/#main-program"
+      },
+      {"title": "Выставка Edu-Tech компаний",
+        "link": "https://sberbank-university.ru/en/edutech-club/events/3087/#dev-tool"
       }
     ],
     "descr": {

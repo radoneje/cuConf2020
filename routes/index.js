@@ -4,7 +4,13 @@ var lang=require('../lang');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  res.redirect("/rus")
+});
+router.get('/rus', function(req, res, next) {
   res.render('index', {lang:lang.rus, title: lang.rus.title });
+});
+router.get('/eng', function(req, res, next) {
+  res.render('index', {lang:lang.eng, title: lang.rus.title });
 });
 
 router.get('/admin', checkAdminLogin, function(req, res, next) {

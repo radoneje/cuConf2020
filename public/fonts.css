@@ -1,41 +1,39 @@
 
 
-@font-face {
-  font-family: 'SB Sans Text';
-  src: url('/fonts/2ae11e8f361b22696c7ca8846f926b96.eot');
-  src: url('/fonts/2ae11e8f361b22696c7ca8846f926b96.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/2ae11e8f361b22696c7ca8846f926b96.woff2') format('woff2'),
-  url('/fonts/2ae11e8f361b22696c7ca8846f926b96.woff') format('woff'),
-  url('/fonts/2ae11e8f361b22696c7ca8846f926b96.ttf') format('truetype'),
-  url('/fonts/2ae11e8f361b22696c7ca8846f926b96.svg#') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 
 @font-face {
-  font-family: 'SB Sans Text';
-  src: url('/fonts/b0538cbcdc90ce2147f6b730edb84a6e.eot');
-  src: url('/fonts/b0538cbcdc90ce2147f6b730edb84a6e.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/b0538cbcdc90ce2147f6b730edb84a6e.woff2') format('woff2'),
-  url('/fonts/b0538cbcdc90ce2147f6b730edb84a6e.woff') format('woff'),
-  url('/fonts/b0538cbcdc90ce2147f6b730edb84a6e.ttf') format('truetype'),
-  url('/fonts/b0538cbcdc90ce2147f6b730edb84a6e.svg#') format('svg');
+  font-family: SB Sans Text;
+  font-display: swap;
+  src: url(/fonts/SBSansText-Bold.eot);
+  src: url(/fonts/SBSansText-Bold.eot?#iefix) format("embedded-opentype"),
+  url(/fonts/SBSansText-Bold.woff2) format("woff2"),
+  url(/fonts/SBSansText-Bold.woff) format("woff"),
+  url(/fonts/SBSansText-Bold.ttf) format("truetype"),
+  url(/fonts/SBSansText-Bold.svg#svgFontName) format("svg");
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: SB Sans Text;
+  font-display: swap;
+  src: url(/fonts/SBSansText-Medium.eot);
+  src: url(/fonts/SBSansText-Medium.eot?#iefix) format("embedded-opentype"),
+  url(/fonts/SBSansText-Medium.woff2) format("woff2"),
+  url(/fonts/SBSansText-Medium.woff) format("woff"),
+  url(/fonts/SBSansText-Medium.ttf) format("truetype"),
+  url(/fonts/SBSansText-Medium.svg#svgFontName) format("svg");
+  font-style: normal;
   font-weight: 500;
-  font-style: normal;
-  font-display: swap;
 }
-
 @font-face {
-  font-family: 'SB Sans Text';
-  src: url('/fonts/5e8d9c82a5c28e026baf7cb56e00dde5.eot');
-  src: url('/fonts/5e8d9c82a5c28e026baf7cb56e00dde5.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/5e8d9c82a5c28e026baf7cb56e00dde5.woff2') format('woff2'),
-  url('/fonts/5e8d9c82a5c28e026baf7cb56e00dde5.woff') format('woff'),
-  url('/fonts/5e8d9c82a5c28e026baf7cb56e00dde5.ttf') format('truetype'),
-  url('/fonts/5e8d9c82a5c28e026baf7cb56e00dde5.svg#') format('svg');
-  font-weight: normal;
-  font-style: normal;
+  font-family: SB Sans Text;
   font-display: swap;
+  src: url(/fonts/SBSansText-Semibold.eot);
+  src: url(/fonts/SBSansText-Semibold.eot?#iefix) format("embedded-opentype"),
+  url(/fonts/SBSansText-Semibold.woff2) format("woff2"),
+  url(/fonts/SBSansText-Semibold.woff) format("woff"),
+  url(/fonts/SBSansText-Semibold.ttf) format("truetype"),
+  url(/fonts/SBSansText-Semibold.svg#svgFontName) format("svg");
+  font-style: normal;
+  font-weight: 600;
 }
-

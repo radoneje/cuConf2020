@@ -44,7 +44,7 @@ h1{
 
   /* ExtraBig */
   font-style: normal;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 44px;
   line-height: 60px;
   /* or 136% */
@@ -261,15 +261,33 @@ h1{
   margin-bottom: 80px;
 
 }
+.langSelector{
+  position: absolute;
+  right: 80px;
+  top: 68px;
+  cursor: pointer;
+  text-decoration-line: underline;
+  color: #9C9FA6;
+  transition: color .2s;
+}
+.langSelector:hover{
+  color:#ffffff;
+
+}
 @media only screen and (max-width: 1024px){
 
-
+.langSelector {
+  right: 20px;
+  top: 48px;
+}
   .centerCol {
     width: 100%;
   }
   .header{
+    min-height: max-content;
     padding: 50px 40px;
     height: auto;
+
   }
   h1{
     /* Group 322 */
@@ -285,7 +303,7 @@ h1{
 
   }
   .headerMenu{
-
+    position: initial;
     margin-top: 40px;
   }
   .descr{
@@ -315,10 +333,10 @@ h1{
     padding: 40px 40px 0 40px;
   }
   .trItemImageText{
-
+    top: calc(50% - 12px);
     font-size: 28px;
     line-height: 35px;
-    top: calc( 40px);
+    //top: calc( 40px);
     height: calc(100% - 80px);
   }
   .sectionTitle{

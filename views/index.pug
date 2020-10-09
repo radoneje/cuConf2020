@@ -22,6 +22,8 @@ block content
           .headerMenu
             each val in lang.menu
               .headerMenuItem(onclick="window.open('"+val.link+"')") !{val.title}
+          .langSelector(onclick="document.location.href=('/"+lang.anotherLangId+"')") #{lang.anotherLangTitle}
+
     .headerBox
       .descr
         each block in lang.descr
