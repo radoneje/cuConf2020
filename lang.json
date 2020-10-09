@@ -2,7 +2,7 @@
   "rus": {
     "langTitle": "ru",
     "langId": "rus",
-    "anotherLangTitle":"en",
+    "anotherLangTitle":"English",
     "anotherLangId":"eng",
     "title":"V Международная конференция<br/>«Больше чем обучение:<br/>вызовы новой нормальности» <br/>23 октября 2020",
     "menu": [
@@ -44,7 +44,7 @@
   "eng": {
     "langTitle": "en",
     "langId": "en",
-    "anotherLangTitle":"ru",
+    "anotherLangTitle":"Russian",
     "anotherLangId":"rus",
     "title":"V Международная конференция<br/>«Больше чем обучение:<br/>вызовы новой нормальности» <br/>23 октября 2020",
     "menu": [
