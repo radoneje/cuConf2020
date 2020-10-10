@@ -13,7 +13,7 @@ block content
       .sL
         //h4 {{getTitle()}}
         .videoWrapper
-          iframe(width="560" height="349" :src="'http://www.youtube.com/embed/'+getYT()+'?rel=0&hd=1'" frameborder="0" allowfullscreen)
+          iframe(width="560" height="349" :src="'https://www.youtube.com/embed/'+getYT()+'?rel=0&hd=1'" frameborder="0" allowfullscreen)
           .sTop(style='background-image: url("/img/bg.png")' v-if="isEnd")
             div
               .sTopHead #{lang.endMessage}
