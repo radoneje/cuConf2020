@@ -3,10 +3,11 @@ extends layout
 block head
 
   style.
-    body {font-family: 'SB Sans Text' ,Arial,sans-serif;transition: opacity 1s ease;opacity: 0; font-size: 16px;line-height: 24px;}
+    body {}
+  script lang=!{JSON.stringify(lang)}
   script(src='/js/bundle.js')
 block content
-  .centerCol
+  .centerCol#app(v-bind:class="{isVisible:loaded}")
     .headerRow(style="background-image:url('/img/bg.png')")
       .headerBox
         .header
@@ -26,62 +27,55 @@ block content
 
     .headerBox
       .descr
-        each block in lang.descr
-          .descrBlock
-            each text in block
-              .descrBlockText #{text}
-    .headerBox
+          .descrBlock(v-for="block in descr")
+              .descrBlockText(v-for="text in block") {{text}}
+    .headerBox(v-if="liveSessions.length>0")
       .section
         .sectionTitle #{lang.sections[0]}
-          each item in [1,2,3,4]
-            .trItem
-              .trItemImage(style="background-image:url(/img/temp.png)")
-                if item!=1
-                  .trItemImageTime 12:00 - 13:30
 
-                else
-                  .trItemImageTime.online #{lang.online}
-                  .trItemImagePlay.online
+            .trItem(v-for="item in liveSessions")
+              .trItemImage(:style="'background-image:url('+item.img+')'" v-on:click="clickActiveItem(item)")
+                .trItemImageTime(v-if="item.status==1") {{item.s}} - {{item.e}}
+                .trItemImageTime.online(v-if="item.status==2") #{lang.online}
+                .trItemImagePlay.online(v-if="item.status==2")
                       <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="36" cy="36" r="36" fill="#F2F2F2"/>
                       <path d="M32.0329 46.8734C30.0818 48.0499 28.5 47.0861 28.5 44.7224V27.2792C28.5 24.9132 30.0818 23.9506 32.0329 25.126L46.5362 33.8696C48.4879 35.0465 48.4879 36.9533 46.5362 38.1299L32.0329 46.8734Z" fill="#ffffff"/>
                       </svg>
 
-                .trItemImageText Панельная дискуссия: Расширение границ пользовательского  опыта обучения: кейс КУ Сбербанка”
+                .trItemImageText {{item.title}}
 
               .trItemDescr
-                .trItemDescrSpeakers
+                .trItemDescrSpeakers(v-if="item.speakers.length>0")
                   .trItemDescrSpeakersTitle
                     .trItemDescrSpeakersTitleHead #{lang.SpeakersTitle}
-                    each item in [1,2,3,4]
-                      .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
-                .trItemDescrModerators
+                    .trItemDescrSpeaker(v-for="spk in item.speakers") {{spk.name}}, {{spk.position}}
+                .trItemDescrModerators(v-if="item.moderators.length>0")
                   .trItemDescrModeratorsTitle
                     .trItemDescrSpeakersTitleHead #{lang.ModeratorTitle}
-                    .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
-    .BgGray
+                    .trItemDescrSpeaker(v-for="mod in item.moderators") {{mod.name}}, {{mod.position}}
+    .BgGray(v-if="endedSessions.length>0")
       .headerBox
         .section.sectionBgGray
           .sectionTitle #{lang.sections[1]}
-            each item in [1,2,3,4]
-              .trItem
-                .trItemImage(style="background-image:url(/img/temp.png)")
+
+              .trItem(v-for="item in endedSessions")
+                .trItemImage(:style="'background-image:url('+item.img+')'" v-on:click="document.location.href='/session/'+item.id+'/"+lang.langId+"'")
                   .trItemImageTime.ended #{lang.ended}
                   .trItemImagePlay.ended
                       <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="36" cy="36" r="36" fill="#F2F2F2"/>
                       <path d="M32.0329 46.8734C30.0818 48.0499 28.5 47.0861 28.5 44.7224V27.2792C28.5 24.9132 30.0818 23.9506 32.0329 25.126L46.5362 33.8696C48.4879 35.0465 48.4879 36.9533 46.5362 38.1299L32.0329 46.8734Z" fill="#33363A"/>
                       </svg>
-                  .trItemImageText Панельная дискуссия: Расширение границ пользовательского  опыта обучения: кейс КУ Сбербанка”
+                  .trItemImageText {{item.title}}
                 .trItemDescr
-                  .trItemDescrSpeakers
+                  .trItemDescrSpeakers(v-if="item.speakers.length>0")
                     .trItemDescrSpeakersTitleHead #{lang.SpeakersTitle}
-                    each item in [1,2,3,4]
-                        .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
-                  .trItemDescrModerators
+                    .trItemDescrSpeaker(v-for="spk in item.speakers") {{spk.name}}, {{spk.position}}
+                  .trItemDescrModerators(v-if="item.moderators.length>0")
                     .trItemDescrModeratorsTitle
-                    .trItemDescrSpeakersTitleHead #{lang.ModeratorTitle}
-                    .trItemDescrSpeaker Иванов Иван Иванович, ЗАО "Ромашка"
+                      .trItemDescrSpeakersTitleHead #{lang.ModeratorTitle}
+                    .trItemDescrSpeaker(v-for="mod in item.moderators") {{mod.name}}, {{mod.position}}
     .headerBox
       .footer
         .footerTitle #{lang.footerTitle}
@@ -96,4 +90,5 @@ block content
             </svg>
 
         .footerCopyRight #{lang.footerCopyRight}
+
 

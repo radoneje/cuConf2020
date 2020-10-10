@@ -9,8 +9,50 @@ block head
 block content
   h1 ADMIN
 
-  div#app
+  div#app(style="opacity:0" v-bind:style="{opacity:opacity}")
     b-container
+      ul.nav.nav-tabs
+        li.nav-item
+          a.nav-link(v-bind:class="{active:adminSect==0}" v-on:click="adminSect=0") Вопросы
+        li.nav-item
+          a.nav-link(v-bind:class="{active:adminSect==1}" v-on:click="adminSect=1") Голосования
+        li.nav-item
+          a.nav-link(v-bind:class="{active:adminSect==2}" v-on:click="adminSect=2") Расписание сессий
+        li.nav-item
+          a.nav-link(v-bind:class="{active:adminSect==3}" v-on:click="adminSect=3") Лид страницы
+    b-container(v-if="adminSect==3" style="position: relative;height: calc(100vh - 111px);")
+      h4 Лид страницы
+      .mt-3.aLidBox
+        h6 Русский лид
+        .mb-3.flex
+          .w-50
+            textarea(v-model="lid[1]" v-on:change="saveLid()")
+          .w-50
+            textarea(v-model="lid[2]" v-on:change="saveLid()")
+        h6 EnglishLid
+          .mb-3.flex
+            .w-50
+              textarea(v-model="lid[3]" v-on:change="saveLid()")
+            .w-50
+              textarea(v-model="lid[4]" v-on:change="saveLid()")
+    b-container(v-if="adminSect==1" style="position: relative;height: calc(100vh - 111px);")
+      h4 Голосования
+    b-container(v-if="adminSect==0" style="position: relative;height: calc(100vh - 111px);")
+      h4 вопросы спикерам
+      .sPanelBody#qDiv(style="height: calc(100% - 40px);")
+        .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false")
+          .sQitemHead
+            .sQitemTime {{getQTime(item.date)}}
+            .sQitemTime {{item.sesstitle}}
+
+            .sQitemLike(v-bind:class="{myLike:isMyLike(item)}" v-on:click="qLike(item)") Like {{item.likes}}
+            .sQitemTime(style="cursor:pointer; color:red" v-on:click="qDelete(item)") Удалить
+          .sQItemText {{item.text}}
+          .sQItemAnswer
+            textarea(v-model="item.answer" v-on:change="saveAnswer(item)" placeholder="перевод")
+
+    b-container(v-if="adminSect==2")
+      h4 Расписание сессий
       button.btn.btn-sm.btn-success(v-on:click="sessAdd()") Добавить cсессию
       b-card.mt-3(v-for="session in sessions")
         .btn-group
@@ -28,9 +70,10 @@ block content
         .d-flex.mt-3.flex-row.bd-highlight
           .p-2.w-25.bd-highlight
             b-form(inline)
-              input.form-control.w-50(:value="getDate(session)" v-on:change="changeDate(session, $event)" placeholder="Дата начала ДД")
+              input.form-control.w-100(:value="getDate(session)" v-on:change="changeDate(session, $event)" placeholder="Дата начала ДД")
               //input.form-control.w-50(:value="getTime(session)" v-on:change="changeTime(session, $event)" placeholder="Время начала ЧЧ:MM")
-              input.form-control.w-50(:value="getTime(session)" v-on:change="changeTime(session, $event)" placeholder="Время начала ЧЧ:MM")
+              input.form-control.w-50(:value="getTime(session)" v-on:change="changeTime(session, $event)" placeholder="началo ЧЧ:MM")
+              input.form-control.w-50(:value="getTimeEnd(session)" v-on:change="changeTimeEnd(session, $event)" placeholder="окончание ЧЧ:MM")
             //img.img-thumbnail(src="/img/tmp.svg")
             div(style="width:250px; height:200px; background-size: cover; border-radius: 4px;" v-bind:style="{'background-image':'url('+session.img+')'}")
             button.btn.btn-primary.btn-block(v-on:click="changeImage(session)")  Изменить картинку

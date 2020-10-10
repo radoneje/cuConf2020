@@ -7,10 +7,21 @@ router.get('/', function(req, res, next) {
   res.redirect("/rus")
 });
 router.get('/rus', function(req, res, next) {
-  res.render('index', {lang:lang.rus, title: lang.rus.title });
+  console.log(lang.rus.title)
+  res.render('index', {lang:lang.rus, title: lang.rus.title.replace(/\<br\/\>/g,' ') });
 });
 router.get('/eng', function(req, res, next) {
-  res.render('index', {lang:lang.eng, title: lang.rus.title });
+  res.render('index', {lang:lang.eng, title: lang.eng.title.replace(/\<br\/\>/g,' ') });
+});
+router.get('/session/:id/:lang?',async  (req, res, next)=> {
+  if(!req.params.lang)
+    return res.redirect("/session/"+req.params.id+"/rus")
+  var r=await req.knex.select("*").from("t_sessions").whereNot({status:0}).andWhere({id:req.params.id});
+  console.log(r.length)
+  if(r.length==0)
+    return res.send(404);
+  var session=r[0];
+  res.render('session', {session:session,lang:lang[req.params.lang], title: lang[req.params.lang].title.replace(/\<br\/\>/g,' ') });
 });
 
 router.get('/admin', checkAdminLogin, function(req, res, next) {

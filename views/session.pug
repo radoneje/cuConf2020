@@ -1,0 +1,58 @@
+extends layout
+
+block head
+
+  style.
+    body {}
+  script lang=!{JSON.stringify(lang)}
+  script session=!{JSON.stringify(session)}
+  script(src='/js/session.js')
+block content
+  .sContainer(v-bind:style="{opacity:opacity}")#app
+    .sBox
+      .sL
+        //h4 {{getTitle()}}
+        .videoWrapper
+          iframe(width="560" height="349" :src="'http://www.youtube.com/embed/'+getYT()+'?rel=0&hd=1'" frameborder="0" allowfullscreen)
+          .sTop(style='background-image: url("/img/bg.png")' v-if="isEnd")
+            div
+              .sTopHead #{lang.endMessage}
+              .sTopMiddle(v-on:click="goToHome()") #{lang.endMessage2}
+        .sSpkDescr
+          .sPanelItemTitle #{lang.SpeakersTitle}
+          .sSpkItem(v-for="spk in session.speakers")
+            .sSpkAvatar(v-bind:style="{backgroundImage:'url('+spk.img+')'}")
+            .sSpkName {{spk.name}}, {{spk.position}}
+        .sSpkDescr
+          .sPanelItemTitle #{lang.ModeratorTitle}
+          .sSpkItem(v-for="mod in session.moderators")
+            .sSpkAvatar(v-bind:style="{backgroundImage:'url('+mod.img+')'}")
+            .sSpkName {{mod.name}}, {{mod.position}}
+        .sFooterMenu
+          .headerMenu
+            each val in lang.menu
+              .headerMenuItem(onclick="window.open('" + val.link + "')") !{val.title}
+        .footer
+          .footerTitle
+            span
+          .footerCopyRight #{lang.footerCopyRight}
+
+      .sR
+        .sRpanel
+          .sPanelHead
+            .sPanelItem
+              .sPanelItemTitle #{lang.chat}
+          .sPanelBody#qDiv
+            .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false")
+              .sQitemHead
+                .sQitemTime {{getQTime(item.date)}}
+                .sQitemLike(v-bind:class="{myLike:isMyLike(item)}" v-on:click="qLike(item)") Like {{item.likes}}
+              .sQItemText {{item.text}}
+              .sQItemAnswer(v-if="item.answer && item.answer.length>0") {{item.answer}}
+          .sPanelFooter(v-if="session.status==2 && !isEnd")
+            .sQInputWr
+              input.sQInput(v-model="newQtext" placeholder=lang.questionPlaceholder v-on:change="newQ()")
+              .sQSend(v-on:click="newQ()")
+                <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svgSendBtn"><desc>Created with Sketch.</desc> <defs></defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Desktop-HD" transform="translate(-712.000000, -505.000000)" fill-rule="nonzero"><g id="ic-baseline-call-made" transform="translate(708.000000, 500.000000)"><g id="Icon"><polygon id="Icon-Shape" fill="#9A9A9A" points="9 5 9 7 15.59 7 4 18.59 5.41 20 17 8.41 17 15 19 15 19 5"></polygon> <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect></g></g></g></g></svg>
+
+

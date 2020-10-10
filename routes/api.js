@@ -15,14 +15,17 @@ router.put('/session', async (req, res, next) =>{
     r[0].moderators=[];
   res.json(r);
 });
-router.get('/session', async (req, res, next) =>{
-  var r = await req.knex.select("*").from("t_sessions").orderBy("id","desc")
+router.get('/session/:id?', async (req, res, next) =>{
+  var r = await req.knex.select("*").from("t_sessions").orderBy("start","desc")
+    if(req.params.id)
+        r=r.filter(s=>s.id==req.params.id);
     for(var session of r){
         session.speakers=await req.knex.select("*").from("v_spktosess").where({sessionid:session.id}).orderBy("sort", "desc");
         session.moderators=await req.knex.select("*").from("v_modtosess").where({sessionid:session.id}).orderBy("sort", "desc");
     }
   res.json(r);
 });
+
 router.post('/session', async (req, res, next) =>{
   var id=req.body.id;
   delete req.body.id;
@@ -126,6 +129,83 @@ router.post("/upModeratorFromSession",async  (req, res, next) =>{
     r=await req.knex.select("*").from("v_modtosess").where({sessionid:req.body.sessionid}).orderBy("sort", "desc");
     res.json(r);
 })
+
+
+
+router.get("/descr/:id",async  (req, res, next) =>{
+    console.log(req.params)
+    var r= await req.knex.select("*").from("v_fields").where("field", "like", "block%").andWhere({prefix:req.params.id})
+    return  res.json(r);
+
+});
+
+router.post("/q",async  (req, res, next) =>{
+    var r= await req.knex("t_q").insert({sessid:req.body.id, text:req.body.text, date:(new Date()), likes:0}, "*")
+    res.json(r[0]);
+});
+router.get("/q",async  (req, res, next) =>{
+    var r= await req.knex.select("*").from("v_q").where({isDeleted:false}).orderBy("date", "desc");
+    res.json(r);
+});
+router.delete("/q/:id",async  (req, res, next) =>{
+    var r= await req.knex("t_q").update({isDeleted:true},"*").where({id:req.params.id}).orderBy("date", "desc");
+    res.json(r);
+});
+router.get("/q/:sessid",async  (req, res, next) =>{
+    var r= await req.knex.select("*").from("t_q").where({sessid:req.params.sessid}).orderBy("date").limit(50)
+    res.json(r);
+});
+
+router.post("/qAnswer",async  (req, res, next) =>{
+
+    var r= await req.knex("t_q").update({answer:req.body.answer}, "*").where({id:req.body.id})
+    res.json(r[0]);
+});
+router.post("/qLike",async  (req, res, next) =>{
+    var r= await req.knex.select("*").from("t_q").where({id:req.body.id});
+    r[0].likes++;
+   r= await req.knex("t_q").update({likes:r[0].likes}, "*").where({id:req.body.id})
+    res.json(r[0].likes);
+});
+router.post("/qUnLike",async  (req, res, next) =>{
+    var r= await req.knex.select("*").from("t_q").where({id:req.body.id});
+    r[0].likes--;
+    if(r[0].likes<0)
+        r[0].likes=0;
+    r= await req.knex("t_q").update({likes:r[0].likes}, "*").where({id:req.body.id})
+    res.json(r[0].likes);
+});
+router.get("/lid", async (req, res, next) =>{
+    var r=await req.knex.select("*").from("t_fieldvalue");
+    var ret=[];
+    r.forEach(d=>{
+        if(!d.val)
+            d.val="[]";
+        var texts=JSON.parse(d.val);
+
+        ret[d.id]="";
+        texts.forEach(t=>{
+            ret[d.id]+=t+"\r\n";
+        })
+        ret[d.id]=ret[d.id].replace(/\r\n$/,'');
+        //ret[d.id]=d.val.replace(/\<br\/\>/g, "\r\n");
+    })
+    res.json(ret);
+})
+router.post("/lid", async (req, res, next) =>{
+    var i=0;
+    for(l of req.body.lid){
+        if(i>0){
+            var text=l;
+            text=text.replace(/\r/g,'');
+            var arr=text.split("\n");
+
+            await req.knex("t_fieldvalue").update({val:JSON.stringify(arr)}).where({id:i});
+        }
+        i++
+    }
+    res.json(1);
+});
 
 
 

@@ -14,12 +14,73 @@ Vue.use(IconsPlugin)
 var app = new Vue({
     el: '#app',
     data: {
+        opacity:0,
+        adminSect:0,
         sessions:[],
         speakers:[],
+        lid:[],
+        quests:[],
+        newQtext:"",
         newSpeaker:{img:'/img/user.png'},
         dateOptions:[{value: 22, text: '22 окт'}, {value: 23, text: '23 окт'}],
     },
     methods: {
+        saveLid:async function(){
+            var res= await axios.post("/api/lid", {lid:this.lid});
+        },
+        qDelete:async function(q){
+            var res= await axios.delete("/api/q/"+q.id);
+            this.quests=this.quests.filter(qq=>qq.id!=q.id);
+
+        },
+        isMyLike:function(q){
+            return localStorage.getItem("qlike"+q.id)
+        },
+        qLike:async function(q){
+            if(!localStorage.getItem("qlike"+q.id)) {
+                localStorage.setItem("qlike" + q.id, true);
+                var res= await axios.post("/api/qLike",{id:q.id});
+                q.likes=res.data;
+            }
+            else{
+                localStorage.removeItem("qlike" + q.id);
+                var res= await axios.post("/api/qUnLike",{id:q.id});
+                q.likes=res.data;
+            }
+
+        },
+        saveAnswer:async function(q){
+            var res= await axios.post("/api/qAnswer",{id:q.id, answer:q.answer});
+        },
+        getQTime:function(date){
+            return moment(date).format('HH:mm');
+        },
+        updateQ:async function(){
+            try {
+                var res = await axios.get("/api/q/",)
+                res.data.forEach(q => {
+                    if (this.quests.filter(e => e.id == q.id).length == 0)
+                        this.quests.push(q);
+                })
+            }
+            catch (e) {console.warn(e)}
+            setTimeout(()=>{this.updateQ()},5000)
+        },
+        newQ:async function(){
+            if(this.newQtext.length<1)
+                return;
+            var text=this.newQtext;
+            this.newQtext="";
+            var res=await axios.post("/api/q", {text, id:session.id})
+            console.log(res.data)
+            this.quests.push(res.data);
+            setTimeout(()=>{
+                var objDiv = document.getElementById("qDiv");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            },0)
+
+        },
+
         upModeratorFromSession:async function(session, speaker){
             var ret=await axios.post("/api/upModeratorFromSession", {speakerid:speaker.id, sessionid:session.id});
             console.log(ret.data)
@@ -113,7 +174,14 @@ var app = new Vue({
             if(!session.start)
                 return ""
             var m=moment(session.start);
-            return m.format("hh:mm")
+            return m.format("HH:mm")
+        },
+        getTimeEnd: function(session){
+
+            if(!session.end)
+                return ""
+            var m=moment(session.end);
+            return m.format("HH:mm")
         },
         getDate:function(session){
 
@@ -155,6 +223,25 @@ var app = new Vue({
 
            //
         },
+        changeTimeEnd:async function(session, e){
+
+            var re=new RegExp(/^(\d\d):(\d\d)$/);
+            var match = e.target.value.match(re);
+            console.log(e.target.value, match)
+            if(match)
+            {
+                if(!session.end)
+                    session.end= new Date("2020-09-23T00:00:00.000")
+                var c=moment(session.end).set("hour",match[1]).set("minute",match[2]);
+                session.end=c.toDate();
+
+                // session.start= new Date("2020-09-26T"+match[1]+":"+match[2]+":00"+".000")
+                // console.log(session.start)
+                await this.updateSession(session);
+            }
+
+            //
+        },
         updateSession: async function(session){
             console.log("updateSession", session)
             var res=await axios.post('/api/session',session );
@@ -172,7 +259,10 @@ var app = new Vue({
     },
     mounted:async function () {
         this.sessions=(await axios.get('/api/session')).data;
-        console.log(this.sessions)
+        this.updateQ();
+        this.lid=(await axios.get('/api/lid')).data;
+        this.opacity=1;
+
     }
 });
 function uploadFile(percent, ret) {

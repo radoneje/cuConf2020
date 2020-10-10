@@ -1,6 +1,7 @@
 $playSize: 72px;
 $green: #18b346;
 $gray: #333333;
+$purpure:#8a0250;
 
 body {
 
@@ -14,11 +15,21 @@ body {
   font-size: 16px;
   line-height: 24px;
   box-sizing: border-box;
+  font-family: 'SB Sans Text' ,Arial,sans-serif;
+
+  font-size: 16px;
+  line-height: 24px;
 }
+
 .centerCol{
   width: 100%;
   //max-width: 1440px;
   margin: 0 auto;
+  transition: opacity 1s ease;
+  opacity: 0;
+}
+.isVisible{
+  opacity: 1;
 }
 .headerRow{
   background-repeat: no-repeat;
@@ -79,10 +90,11 @@ h1{
   cursor: pointer;
   transition: color .2s ;
 }
-.headerMenuItem:hover{
+.headerBox .headerMenuItem:hover{
   color:#ffffff;
 
 }
+
 .descr{
   margin-top: 80px;
   padding: 14px 109px;
@@ -277,6 +289,8 @@ font-weight: normal;
   color:#ffffff;
 
 }
+@import 'sStyle';
+
 @media only screen and (max-width: 1440px){
 .headerMenu {
   position: initial;
@@ -352,8 +366,37 @@ font-weight: normal;
   }
 
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 670px) {
 
+.sBox{
+  display: block;
+}
+  .sL{
+    width: 100%;
+  }
+  .sSpkDescr{
+    display: none;
+  }
+  .sR{
+    position: static;
+    width: 100%;
+
+
+  }
+  .sRpanel{
+
+
+  }
+  .sFooterMenu{
+    display: none;
+  }
+  .sL .footer{
+    display: none;
+  }
+  .sPanelBody {
+    height: auto;
+    max-height: calc(100% - 100px);
+  }
   .logoBox{
     display: block;
     margin-bottom: 40px;

@@ -3,13 +3,13 @@ extends layout
 block head
 block content
   div(style="width:100%; height:100vh;display: flex;align-items: center;justify-content: center;")
-    form(method="POST")
+    form(method="POST" style="width:300px;box-size:border-box;font-size:24px; ")
       .loginctrl
-        input(id="uName" placeholder="User name" name="user")
+        input(id="uName" placeholder="User name" name="user" style="font-size: 24px;width:100%;margin-bottom:10px; padding:4px;box-sizing: border-box; border:1px solid black;")
       .loginctrl
-        input(type="password" placeholder="password" name="pass")
+        input(type="password" placeholder="password" name="pass" style="font-size: 24px;width:100%;margin-bottom:10px; padding:4px;box-sizing: border-box;border:1px solid black")
       .loginctrl
-        input(type="submit" value="Log in")
+        input(type="submit" value="Log in" style="width:100%;margin-bottom:10px; padding:4px; cursor:pointer;font-size: 24px;")
 
   script.
     document.getElementById("uName").focus();
