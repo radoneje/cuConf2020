@@ -16,7 +16,7 @@ router.put('/session', async (req, res, next) =>{
   res.json(r);
 });
 router.get('/session/:id?', async (req, res, next) =>{
-  var r = await req.knex.select("*").from("t_sessions").orderBy("start","desc")
+  var r = await req.knex.select("*").from("t_sessions").orderBy("start");//,"desc")
     if(req.params.id)
         r=r.filter(s=>s.id==req.params.id);
     for(var session of r){
