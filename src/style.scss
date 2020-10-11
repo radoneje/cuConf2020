@@ -157,10 +157,13 @@ h1{
 }
 .trItemDescrSpeakers{
 font-weight: normal;
-  position: relative;
+
   padding-left: 2em;
 }
-.trItemDescrSpeakers:before{
+.trItemDescrSpeaker{
+  position: relative;
+}
+.trItemDescrSpeaker:before{
   position: absolute;
   left: 0;
   top: calc(50% - 2px);
