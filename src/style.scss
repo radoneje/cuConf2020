@@ -137,6 +137,7 @@ h1{
 .trItemImage{
   height: 480px;
   width: 696px;
+  flex: 0 0 696px;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -184,7 +185,7 @@ font-weight: normal;
   position: absolute;
   top:calc(50% - 12px);
   left: 160px;
-  width: calc(100% - 160px - 20px);
+  width: calc(100% - 160px - 40px);
   height: 50%;
   overflow-y: hidden;
   font-style: normal;
