@@ -86,9 +86,9 @@
     "footerMap": "Show on map",
     "footerCopyRight": "© 2012–2020 Sberbank Corporate University Autonomous Non-Commercial Organization for Further Training and Development License to conduct educational activities dated April 2, 2014. Registration number — 034970.",
     "chat": "Questions",
-    "questionPlaceholder": "You question",
-    "endMessage": "Сессия окончена",
-    "endMessage2": "Go to list"
+    "questionPlaceholder": "Ask your question",
+    "endMessage": "This live stream has ended",
+    "endMessage2": "Go to Live Stream Main Page"
   }
 }
 
