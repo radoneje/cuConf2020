@@ -162,16 +162,17 @@ font-weight: normal;
 }
 .trItemDescrSpeaker{
   position: relative;
+  padding-left: 1em;
 }
 .trItemDescrSpeaker:before{
   position: absolute;
   left: 0;
-  top: calc(50% - 2px);
+  top: calc(.5em + 2px);
   content: '';
-  width: 4px;
-  height: 4px;
+  width: 0px;
+  height: 1px;
   border-radius: 50%;
-  border:1px solid black;
+  border: 4px solid black;
 
 }
 .trItemDescrModerators{
