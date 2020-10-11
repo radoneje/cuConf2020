@@ -157,6 +157,12 @@ h1{
 }
 .trItemDescrSpeakers{
 font-weight: normal;
+  position: relative;
+  padding-left: 2em;
+}
+.trItemDescrSpeakers:before{
+  content: '';
+
 }
 .trItemDescrModerators{
   font-weight: 400;
