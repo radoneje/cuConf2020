@@ -306,6 +306,16 @@ font-weight: normal;
   color:#ffffff;
 
 }
+.sPanelItem{
+  position: relative;
+}
+.sPanelItem .langSelector{
+  right: 0;
+  top: 0;
+}
+.sPanelItem .langSelector:hover{
+  color:#000000;
+}
 @import 'sStyle';
 
 @media only screen and (max-width: 1367px) {

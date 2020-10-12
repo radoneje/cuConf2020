@@ -42,6 +42,7 @@ block content
           .sPanelHead
             .sPanelItem
               .sPanelItemTitle #{lang.chat}
+              .langSelector(onclick="document.location.href=('/session/"+session.id+"/"+lang.anotherLangId+"')") #{lang.anotherLangTitle}
           .sPanelBody#qDiv
             .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false")
               .sQitemHead
