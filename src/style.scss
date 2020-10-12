@@ -406,12 +406,14 @@ font-weight: normal;
   }
   .sPanelItemTitle{
     width: min-content;
+    line-height: 1em;
   }
 
 }
 @media only screen and (max-width: 670px) {
   .sPanelItemTitle{
     width: max-content;
+
   }
   .sFooterMenu.Mobile{
     display: block;
