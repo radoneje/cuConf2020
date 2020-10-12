@@ -1,6 +1,6 @@
 .sContainer{
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   opacity: 0;
   transition: opacity 1s ease;
@@ -17,7 +17,7 @@
   display: flex;
 }
 .sL{
-  width: calc(75% - 11px);
+  width: calc(75%);
 }
 .sL h4{
   padding: 0 20px ;
