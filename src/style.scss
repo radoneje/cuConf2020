@@ -320,6 +320,9 @@ font-weight: normal;
 }
 @import 'sStyle';
 
+.sFooterMenu.Mobile{
+  display: none;
+}
 @media only screen and (max-width: 1367px) {
   .trItemImage {
     width: 50%;
@@ -332,6 +335,7 @@ font-weight: normal;
   position: initial;
 }}
 @media only screen and (max-width: 1024px){
+
 
 .langSelector {
   right: 20px;
@@ -400,9 +404,20 @@ font-weight: normal;
     font-size: 26px;
     line-height: 28px;
   }
+  .sPanelItemTitle{
+    width: min-content;
+  }
 
 }
 @media only screen and (max-width: 670px) {
+  .sPanelItemTitle{
+    width: max-content;
+  }
+  .sFooterMenu.Mobile{
+    display: block;
+    position: static;
+    margin-bottom: 40px;
+  }
 
 .sBox{
   display: block;
