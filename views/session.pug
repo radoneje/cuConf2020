@@ -31,7 +31,7 @@ block content
         .sFooterMenu
           .headerMenu
             each val in lang.menu
-              .headerMenuItem(onclick="window.open('" + val.link + "')") !{val.title}
+              .headerMenuItem(onclick="document.location.href=('" + val.link + "')") !{val.title}
         .footer
           .footerTitle
             span

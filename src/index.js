@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function(){ // Аналог $(docu
        },
        mounted:async function () {
            var res=await axios.get("/api/descr/"+lang.langId);
-           console.log(res.data, lang)
            for(var i=0; i<2; i++) {
                  this.descr[i] = JSON.parse((res.data.filter(r => r.field == "block"+i))[0].val)
                  this.descr[i] = JSON.parse((res.data.filter(r => r.field == "block"+i))[0].val)

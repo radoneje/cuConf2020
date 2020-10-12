@@ -7,6 +7,9 @@
     "anotherLangId":"eng",
     "title":"V Международная конференция<br/>«Больше чем обучение:<br/>вызовы новой нормальности» <br/>23 октября 2020",
     "menu": [
+      {"title": "Все сессии",
+        "link": "/"
+      },
       {"title": "Спикеры конференции",
         "link": "https://sberbank-university.ru/edutech-club/events/3039/#teachers"
       },
@@ -54,6 +57,10 @@
     "anotherLangId":"rus",
     "title":"V International Conference<br/>'More Than Just Learning:<br/>Exploring the Next Normal' <br/>23 October 2020",
     "menu": [
+      {
+      "title": "Go to Live Stream Main Page",
+      "link": "/"
+      },
       {"title": "Speakers",
         "link": "https://sberbank-university.ru/en/edutech-club/events/3087/#teachers"
       },
