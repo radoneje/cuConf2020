@@ -30,6 +30,7 @@ block content
             .sSpkName {{mod.name}}, {{mod.position}}
         .sFooterMenu
           .headerMenu
+            .headerMenuItem(onclick="document.location.href=('"+lang.goHome.link+"')") !{lang.goHome.title}
             each val in lang.menu
               .headerMenuItem(onclick="document.location.href=('" + val.link + "')") !{val.title}
         .footer

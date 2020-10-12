@@ -315,6 +315,9 @@ font-weight: normal;
 .sPanelItem .langSelector:hover{
   color:#000000;
 }
+.sFooterMenu .headerMenu{
+  position:static;
+}
 @import 'sStyle';
 
 @media only screen and (max-width: 1367px) {
