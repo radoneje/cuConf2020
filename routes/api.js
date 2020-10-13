@@ -157,7 +157,7 @@ router.post("/q",async  (req, res, next) =>{
                     "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
                 },
             });
-
+        console.log(gr.data);
         if (!gr.data.success) {
             return res.status(404)
         }
