@@ -146,13 +146,18 @@ router.get("/descr/:id",async  (req, res, next) =>{
 });
 
 router.post("/q",async  (req, res, next) =>{
-    console.log("https://www.google.com/recaptcha/api/siteverify");
+
     try {
-        var gr = await axios.post("https://www.google.com/recaptcha/api/siteverify", {
-            secret: '6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
-            response: req.body.token
-        });
-        console.log("responce", gr.data);
+        var secret='6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N';
+        var  response=req.body.token;
+        console.log("https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}");
+        var gr = await axios.post("https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}", {},
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+                },
+            });
+
         if (!gr.data.success) {
             return res.status(404)
         }
