@@ -329,7 +329,9 @@ font-weight: normal;
     flex: 0 0 50%;
   }
 }
-
+.grecaptcha-badge{
+  display: none !important;
+}
 @media only screen and (max-width: 1440px){
 .headerMenu {
   position: initial;
