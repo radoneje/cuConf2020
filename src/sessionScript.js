@@ -129,3 +129,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+function onRecaptchaLoadCallback() {
+    var clientId = grecaptcha.render('inline-badge', {
+        'sitekey': '6Lek0tYZAAAAACqhYvQVHlL6mSZBXMhfaQ7X9V_6',
+        'badge': 'inline',
+        'size': 'invisible'
+    });
+}
