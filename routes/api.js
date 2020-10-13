@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var uuid =require('uuidv4');
 var path =require('path');
+var axios =require('axios');
 var fs =require('fs');
 
 /* GET users listing. */
@@ -145,6 +146,14 @@ router.get("/descr/:id",async  (req, res, next) =>{
 });
 
 router.post("/q",async  (req, res, next) =>{
+    var gr=await axios.post("https://www.google.com/recaptcha/api/siteverify", {
+        secret:'6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
+        response:req.body.token
+    });
+    if(!gr.data.success){
+       return res.status(404)
+    }
+
     var r= await req.knex("t_q").insert({sessid:req.body.id, text:req.body.text, date:(new Date()), likes:0}, "*")
     res.json(r[0]);
 });
@@ -167,12 +176,26 @@ router.post("/qAnswer",async  (req, res, next) =>{
     res.json(r[0]);
 });
 router.post("/qLike",async  (req, res, next) =>{
+    var gr=await axios.post("https://www.google.com/recaptcha/api/siteverify", {
+        secret:'6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
+        response:req.body.token
+    });
+    if(!gr.data.success){
+        return res.status(404)
+    }
     var r= await req.knex.select("*").from("t_q").where({id:req.body.id});
     r[0].likes++;
    r= await req.knex("t_q").update({likes:r[0].likes}, "*").where({id:req.body.id})
     res.json(r[0].likes);
 });
 router.post("/qUnLike",async  (req, res, next) =>{
+    var gr=await axios.post("https://www.google.com/recaptcha/api/siteverify", {
+        secret:'6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
+        response:req.body.token
+    });
+    if(!gr.data.success){
+        return res.status(404)
+    }
     var r= await req.knex.select("*").from("t_q").where({id:req.body.id});
     r[0].likes--;
     if(r[0].likes<0)
