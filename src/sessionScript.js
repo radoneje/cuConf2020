@@ -66,14 +66,15 @@ document.addEventListener('DOMContentLoaded', function() {
             newQ:async function(){
                 if(this.newQtext.length<1)
                     return;
+                var _this=this;
                 grecaptcha.ready(function() {
                     grecaptcha.execute('6Lek0tYZAAAAACqhYvQVHlL6mSZBXMhfaQ7X9V_6', {action: 'submit'}).then(async function(token) {
                         // Add your logic to submit to your backend server here.
-                        var text=this.newQtext;
-                        this.newQtext="";
+                        var text=_this.newQtext;
+                        _this.newQtext="";
                         var res=await axios.post("/api/q", {text, id:session.id, token})
                         console.log(res.data)
-                        this.quests.push(res.data);
+                        _this.quests.push(res.data);
                         setTimeout(()=>{
                             var objDiv = document.getElementById("qDiv");
                             objDiv.scrollTop = objDiv.scrollHeight;
