@@ -146,16 +146,29 @@ router.get("/descr/:id",async  (req, res, next) =>{
 });
 
 router.post("/q",async  (req, res, next) =>{
-    var gr=await axios.post("https://www.google.com/recaptcha/api/siteverify", {
-        secret:'6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
-        response:req.body.token
-    });
-    if(!gr.data.success){
-       return res.status(404)
-    }
+    console.log("https://www.google.com/recaptcha/api/siteverify");
+    try {
+        var gr = await axios.post("https://www.google.com/recaptcha/api/siteverify", {
+            secret: '6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
+            response: req.body.token
+        });
 
-    var r= await req.knex("t_q").insert({sessid:req.body.id, text:req.body.text, date:(new Date()), likes:0}, "*")
-    res.json(r[0]);
+        if (!gr.data.success) {
+            return res.status(404)
+        }
+
+        var r = await req.knex("t_q").insert({
+            sessid: req.body.id,
+            text: req.body.text,
+            date: (new Date()),
+            likes: 0
+        }, "*")
+        res.json(r[0]);
+    }
+    catch (e) {
+        console.log(e);
+        res.json([]);
+    }
 });
 router.get("/q",async  (req, res, next) =>{
     var r= await req.knex.select("*").from("v_q").where({isDeleted:false}).orderBy("date", "desc").limit(50);
