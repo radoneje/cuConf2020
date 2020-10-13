@@ -1,6 +1,5 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-
 import './style.scss'
 import axios from 'axios'
 import moment from 'moment'
@@ -14,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
             newQtext:'',
             quests:[],
             isEnd:false,
-            opacity:0
+            opacity:0,
+            token:null
         },
         methods: {
             goToHome:function(){
@@ -66,15 +66,22 @@ document.addEventListener('DOMContentLoaded', function() {
             newQ:async function(){
                 if(this.newQtext.length<1)
                     return;
-                var text=this.newQtext;
-                this.newQtext="";
-                var res=await axios.post("/api/q", {text, id:session.id})
-                console.log(res.data)
-                this.quests.push(res.data);
-                setTimeout(()=>{
-                    var objDiv = document.getElementById("qDiv");
-                    objDiv.scrollTop = objDiv.scrollHeight;
-                },0)
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6Lek0tYZAAAAACqhYvQVHlL6mSZBXMhfaQ7X9V_6', {action: 'submit'}).then(async function(token) {
+                        // Add your logic to submit to your backend server here.
+                        var text=this.newQtext;
+                        this.newQtext="";
+                        var res=await axios.post("/api/q", {text, id:session.id, token})
+                        console.log(res.data)
+                        this.quests.push(res.data);
+                        setTimeout(()=>{
+                            var objDiv = document.getElementById("qDiv");
+                            objDiv.scrollTop = objDiv.scrollHeight;
+                        },0)
+                    });
+                });
+
+
 
             },
             getTitle:function () {
