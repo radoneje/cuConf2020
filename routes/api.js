@@ -9,6 +9,11 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/test', async (req, res, next) =>{
+    console.log('/test', new Date())
+    res.json(new Date());
+});
+
 router.put('/session', async (req, res, next) =>{
   var r = await req.knex("t_sessions").insert({}, "*")
     r[0].speakers=[];
