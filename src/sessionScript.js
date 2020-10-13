@@ -24,16 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 return localStorage.getItem("qlike"+q.id)
             },
             qLike:async function(q){
-                if(!localStorage.getItem("qlike"+q.id)) {
-                     localStorage.setItem("qlike" + q.id, true);
-                    var res= await axios.post("/api/qLike",{id:q.id});
-                    q.likes=res.data;
-                }
-                else{
-                    localStorage.removeItem("qlike" + q.id);
-                    var res= await axios.post("/api/qUnLike",{id:q.id});
-                    q.likes=res.data;
-                }
+
+                var _this=this;
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6Lek0tYZAAAAACqhYvQVHlL6mSZBXMhfaQ7X9V_6', {action: 'submit'}).then(async function(token) {
+                        // Add your logic to submit to your backend server here.
+                        if(!localStorage.getItem("qlike"+q.id)) {
+                            localStorage.setItem("qlike" + q.id, true);
+                            var res= await axios.post("/api/qLike",{id:q.id, token:token});
+                            q.likes=res.data;
+                        }
+                        else{
+                            localStorage.removeItem("qlike" + q.id);
+                            var res= await axios.post("/api/qUnLike",{id:q.id, token:token});
+                            q.likes=res.data;
+                        }
+                    });
+                });
+
+
+
 
             },
             getQTime:function(date){
@@ -72,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Add your logic to submit to your backend server here.
                         var text=_this.newQtext;
                         _this.newQtext="";
-                        var res=await axios.post("/api/q", {text, id:session.id, token})
+                        var res=await axios.post("/api/q", {text, id:session.id, token:token})
                         console.log(res.data)
                         _this.quests.push(res.data);
                         setTimeout(()=>{
