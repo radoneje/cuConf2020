@@ -150,14 +150,13 @@ router.post("/q",async  (req, res, next) =>{
     try {
         var secret='6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N';
         var  response=req.body.token;
-        console.log(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`);
+
         var gr = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`, {},
             {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
                 },
             });
-        console.log(gr.data);
         if (!gr.data.success) {
             return res.status(404).send(gr.data['error-codes']);
         }
@@ -194,26 +193,39 @@ router.post("/qAnswer",async  (req, res, next) =>{
     res.json(r[0]);
 });
 router.post("/qLike",async  (req, res, next) =>{
-    var gr=await axios.post("https://www.google.com/recaptcha/api/siteverify", {
-        secret:'6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
-        response:req.body.token
-    });
-    if(!gr.data.success){
-        return res.status(404)
+    var secret='6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N';
+    var  response=req.body.token;
+
+    var gr = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`, {},
+        {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+            },
+        });
+    if (!gr.data.success) {
+        return res.status(404).send(gr.data['error-codes']);
     }
+
     var r= await req.knex.select("*").from("t_q").where({id:req.body.id});
     r[0].likes++;
    r= await req.knex("t_q").update({likes:r[0].likes}, "*").where({id:req.body.id})
     res.json(r[0].likes);
 });
 router.post("/qUnLike",async  (req, res, next) =>{
-    var gr=await axios.post("https://www.google.com/recaptcha/api/siteverify", {
-        secret:'6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
-        response:req.body.token
-    });
-    if(!gr.data.success){
-        return res.status(404)
+
+    var secret='6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N';
+    var  response=req.body.token;
+
+    var gr = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`, {},
+        {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+            },
+        });
+    if (!gr.data.success) {
+        return res.status(404).send(gr.data['error-codes']);
     }
+
     var r= await req.knex.select("*").from("t_q").where({id:req.body.id});
     r[0].likes--;
     if(r[0].likes<0)
