@@ -152,7 +152,7 @@ router.post("/q",async  (req, res, next) =>{
             secret: '6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N',
             response: req.body.token
         });
-
+        console.log("responce", gr.data);
         if (!gr.data.success) {
             return res.status(404)
         }
