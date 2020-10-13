@@ -149,15 +149,15 @@ router.post("/q",async  (req, res, next) =>{
     res.json(r[0]);
 });
 router.get("/q",async  (req, res, next) =>{
-    var r= await req.knex.select("*").from("v_q").where({isDeleted:false}).orderBy("date", "desc");
+    var r= await req.knex.select("*").from("v_q").where({isDeleted:false}).orderBy("date", "desc").limit(50).orderBy("date" );
     res.json(r);
 });
 router.delete("/q/:id",async  (req, res, next) =>{
-    var r= await req.knex("t_q").update({isDeleted:true},"*").where({id:req.params.id}).orderBy("date", "desc");
+    var r= await req.knex("t_q").update({isDeleted:true},"*").where({id:req.params.id});
     res.json(r);
 });
 router.get("/q/:sessid",async  (req, res, next) =>{
-    var r= await req.knex.select("*").from("t_q").where({sessid:req.params.sessid}).orderBy("date").limit(50)
+    var r= await req.knex.select("*").from("t_q").where({sessid:req.params.sessid}).orderBy("date", "desc").limit(50).orderBy("date" );
     res.json(r);
 });
 
