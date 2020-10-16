@@ -35,7 +35,9 @@ block content
 
             .trItem(v-for="item in liveSessions")
               .trItemImage(:style="'background-image:url('+item.img+')'" v-on:click="clickActiveItem(item)")
-                .trItemImageTime(v-if="item.status==1") {{item.s}} - {{item.e}}
+                .trItemImageTime(v-if="item.status==1")
+                  .itemDateTitle {{item.d}}
+                  .itemTimeTitle {{item.s}} - {{item.e}}
                 .trItemImageTime.online(v-if="item.status==2") #{lang.online}
                 .trItemImagePlay.online(v-if="item.status==2")
                       <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">

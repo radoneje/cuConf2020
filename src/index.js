@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function(){ // Аналог $(docu
                    var res=await axios.get("/api/session/");
                    this.sessions=res.data;
                    this.sessions.forEach(s=>{
+                       s.d=moment(s.start).format("DD")
+                       if(lang.langId=="rus")
+                           s.d+=" октября";
+                       else
+                        s.d="October, "+s.d;
                        s.s=moment(s.start).format("HH:mm")
                             s.e=moment(s.end).format("HH:mm")
                        console.log('title'+lang.langId.substr(0,2))
