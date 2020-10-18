@@ -204,4 +204,64 @@ var sessionConfig=Object.assign({}, config,{
 
 });
 
-module.exports =[prodConfig, adminConfig, sessionConfig]
+var questionsConfig=Object.assign({}, config,{
+    mode:'development',
+    entry: [
+        './src/questionsScript.js',
+        //  path.resolve(__dirname, 'src/js/index.js')
+    ],
+    output: {
+        path: path.resolve(__dirname, 'public/js'),
+        filename: 'questions.js'
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        },
+        extensions: ['*', '.js', '.vue', '.json']
+    },
+    devtool: "source-map",
+    module: {
+        rules: [{
+            test: /\.js$/,
+            include: path.resolve(__dirname, 'src'),
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        [
+                            "@babel/preset-env",
+                            {
+                                "corejs": { "version":3 },
+                                "useBuiltIns": "usage",
+                                "targets": {
+                                    "edge": "17",
+                                    "firefox": "60",
+                                    "chrome": "67",
+                                    "safari": "11.1",
+                                    "ie": "11"
+                                }
+                            }
+                        ]
+                    ]
+                }
+            }
+        },
+            {
+                test: /\.scss$/,
+                include: path.resolve(__dirname, 'src'),
+                loaders: [
+                    require.resolve('style-loader'),
+                    require.resolve('css-loader'),
+                    require.resolve('sass-loader')
+                ]
+            },
+        ]
+    },
+    plugins: [
+        new ExtractTextPlugin('style.css')
+    ]
+
+});
+
+module.exports =[prodConfig, adminConfig, sessionConfig, questionsConfig]

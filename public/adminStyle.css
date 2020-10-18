@@ -100,6 +100,16 @@ input:focus{
 }
 .sQitem{
     margin-bottom: 20px;
+    padding:10px;
+
+    background: rgba(0,0,0 ,.1);
+}
+.sQitem.isSpk{
+    background: rgba(0,255,0 ,.2);
+}
+.sQItemText, .sQItemAnswer{
+    font-size: 14px !important;
+    line-height: 24px !important;
 }
 .sQitemHead{
     display: flex;

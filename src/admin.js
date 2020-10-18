@@ -52,6 +52,10 @@ var app = new Vue({
         saveAnswer:async function(q){
             var res= await axios.post("/api/qAnswer",{id:q.id, answer:q.answer});
         },
+        qToSpk:async function(q){
+            var res= await axios.post("/api/qToSpk",{id:q.id, isSpk:q.isSpk});
+            q.isSpk=!q.isSpk;
+        },
         getQTime:function(date){
             return moment(date).format('HH:mm');
         },
@@ -61,6 +65,15 @@ var app = new Vue({
                 res.data.forEach(q => {
                     if (this.quests.filter(e => e.id == q.id).length == 0)
                         this.quests.push(q);
+                    this.quests.forEach(qq=>{
+                        if(qq.id==q.id) {
+                            qq.isDeleted = q.isDeleted;
+                            qq.isSpk = q.isSpk;
+                            var el=document.getElementById("qAnsw"+qq.id);
+                            if((document.activeElement != el))
+                                qq.answer = q.answer;
+                        }
+                    })
                 })
             }
             catch (e) {console.warn(e)}

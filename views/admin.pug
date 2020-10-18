@@ -38,28 +38,33 @@ block content
     b-container(v-if="adminSect==1" style="position: relative;height: calc(100vh - 111px);")
       h4 Голосования
     b-container(v-if="adminSect==0" style="position: relative;height: calc(100vh - 111px);")
-      h4 вопросы спикерам
+      h4 вопросы спикерам ({{quests.length}})
       .sPanelBody#qDiv(style="height: calc(100% - 40px);")
-        .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false")
+        .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false" v-bind:class="{isSpk:item.isSpk}")
           .sQitemHead
             .sQitemTime {{getQTime(item.date)}}
             .sQitemTime {{item.sesstitle}}
 
             .sQitemLike(v-bind:class="{myLike:isMyLike(item)}" v-on:click="qLike(item)") Like {{item.likes}}
+            .sQitemTime(style="cursor:pointer; color:green" v-on:click="qToSpk(item)")
+                span(v-if="item.isSpk") Убрать от спикера
+                span(v-else) Показать спикеру
             .sQitemTime(style="cursor:pointer; color:red" v-on:click="qDelete(item)") Удалить
           .sQItemText {{item.text}}
           .sQItemAnswer
-            textarea(v-model="item.answer" v-on:change="saveAnswer(item)" placeholder="перевод")
+            textarea(:id="'qAnsw'+item.id" v-model="item.answer" v-on:change="saveAnswer(item)" placeholder="перевод")
 
     b-container(v-if="adminSect==2")
       h4 Расписание сессий
       button.btn.btn-sm.btn-success(v-on:click="sessAdd()") Добавить cсессию
       b-card.mt-3(v-for="session in sessions")
         .btn-group
+          input(placeholder="code" v-model="session.code" v-on:change="updateSession(session)")
           .btn.btn-sm(v-on:click="changeStatus(session, 0)"  v-bind:class="{'btn-warning':(session.status==0),'btn-outline-secondary':(session.status!=0)}") черновик
           .btn.btn-sm(v-on:click="changeStatus(session, 1)"  v-bind:class="{'btn-warning':(session.status==1),'btn-outline-secondary':(session.status!=1)}") план
           .btn.btn-sm(v-on:click="changeStatus(session, 2)"  v-bind:class="{'btn-warning':(session.status==2),'btn-outline-secondary':(session.status!=2)}") в эфире
           .btn.btn-sm(v-on:click="changeStatus(session, 3)"  v-bind:class="{'btn-warning':(session.status==3),'btn-outline-secondary':(session.status!=3)}") завершено
+
         .d-flex.mt-3.flex-row.bd-highlight
           .p-2.w-50.bd-highlight
             input.form-control(v-model="session.titleru" v-on:change="updateSession(session)" placeholder="Название сессии")

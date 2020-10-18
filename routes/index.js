@@ -20,6 +20,7 @@ router.get('/session/:id/:lang?',async  (req, res, next)=> {
   console.log(r.length)
   if(r.length==0)
     return res.send(404);
+  console.log(r)
   var session=r[0];
   res.render('session', {session:session,lang:lang[req.params.lang], title: lang[req.params.lang].title.replace(/\<br\/\>/g,' ') });
 });
@@ -27,6 +28,23 @@ router.get('/session/:id/:lang?',async  (req, res, next)=> {
 router.get('/admin', checkAdminLogin, function(req, res, next) {
   res.render('admin', {title:"admin"});
 });
+
+router.get('/questions/:code', async function(req, res, next) {
+  var r=await req.knex.select("*").from("t_sessions").where({code:req.params.code});
+  if(r.length==0)
+    return res.sendStatus(404).send("no code")
+
+  res.render('questions', {title:"questions", session:r[0],lang:lang["rus"]});
+});
+
+router.get('/moderator/:code', async function(req, res, next) {
+  var r=await req.knex.select("*").from("t_sessions").where({code:req.params.code});
+  if(r.length==0)
+    return res.sendStatus(404).send("no code")
+
+  res.render('moderator', {title:"questions", session:r[0],lang:lang["rus"]});
+});
+
 
 function checkAdminLogin(req, res, next){
  if(!req.session.admin)

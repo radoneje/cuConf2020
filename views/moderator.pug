@@ -1,0 +1,27 @@
+extends layout
+
+block head
+
+  style.
+    body {}
+  script session=!{JSON.stringify(session)}
+  script lang=!{JSON.stringify(lang)}
+  script(src='/js/questions.js')
+block content
+  .qContainer(v-bind:style="{opacity:opacity}")#app
+          h4 Вопросы  ({{quests.length}})
+          .sPanelBody#qDiv
+            .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false" v-bind:class="{isSpk:item.isSpk}")
+              .sQitemHead()
+                .sQitemTime
+                  span {{getQTime(item.date)}}
+                  span.sQitemLike(v-bind:class="{myLike:isMyLike(item)}" v-on:click="qLike(item)" style="margin-left:10px") Like {{item.likes}}
+                .sQitemTime(style="cursor:pointer; color:green" v-on:click="qToSpk(item)")
+                  span(v-if="item.isSpk") Убрать от спикера
+                  span(v-else) Показать спикеру
+                .sQitemTime(style="cursor:pointer; color:red" v-on:click="qDelete(item)") Удалить
+              .sQItemText.qQItemText {{item.text}}
+              .sQitemHead(v-if="!item.answer")
+                .sQitemTime(style="cursor:pointer; color:green" v-on:click="addAnswer(item)") перевод
+              .sQItemAnswer(v-else)
+                textarea( :id="'qAnsw'+item.id" v-model="item.answer" v-on:change="saveAnswer(item)" placeholder="перевод")

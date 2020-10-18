@@ -192,6 +192,12 @@ router.post("/qAnswer",async  (req, res, next) =>{
     var r= await req.knex("t_q").update({answer:req.body.answer}, "*").where({id:req.body.id})
     res.json(r[0]);
 });
+router.post("/qToSpk",async  (req, res, next) =>{
+
+    var r= await req.knex("t_q").update({isSpk:(!req.body.isSpk)}, "*").where({id:req.body.id})
+    res.json(r[0]);
+});
+
 router.post("/qLike",async  (req, res, next) =>{
     var secret='6Lek0tYZAAAAAPIcRa8A2i8eZlLAwyDjDHL3Wg5N';
     var  response=req.body.token;
