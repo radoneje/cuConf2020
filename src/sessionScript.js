@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             if(qq.id==q.id) {
                                 qq.isDeleted = q.isDeleted;
                                 qq.answer = q.answer;
+                                qq.likes = q.likes;
                             }
                         })
                         setTimeout(()=>{

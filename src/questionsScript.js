@@ -46,6 +46,7 @@ var app = new Vue({
                         if(qq.id==q.id) {
                             qq.isDeleted = q.isDeleted;
                             qq.isSpk = q.isSpk;
+                            qq.likes = q.likes;
                             var el=document.getElementById("qAnsw"+qq.id);
                             if((document.activeElement != el))
                                 qq.answer = q.answer;

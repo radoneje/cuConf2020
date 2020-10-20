@@ -8,12 +8,24 @@ block head
   script lang=!{JSON.stringify(lang)}
   script(src='/js/questions.js')
 block content
+  .centerCol(style="opacity: 1;")
+    .headerRow(style="background-image:url('/img/bg.png')")
+      .headerBox
+        .header
+          .logoBox
+            .logo
+              img(src=lang.mainLogo)
+            .logo
+              img(src="/img/logo2.svg")
+            .logo
+              img(src="/img/logo3.svg")
+          h1 !{session.titleru} <br/> !{session.titleen}
+          h4 &nbsp;
+          h4 Вопросы
   .qContainer(v-bind:style="{opacity:opacity}")#app
-          h4 Вопросы  ({{quests.length}})
           .sPanelBody#qDiv
             .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false && item.isSpk")
               .sQitemHead(style="justify-content: flex-start;")
                 .sQitemTime {{getQTime(item.date)}}
-                .sQitemLike(v-bind:class="{myLike:isMyLike(item)}" v-on:click="qLike(item)" style="margin-left:10px") Like {{item.likes}}
               .sQItemText.qQItemText {{item.text}}
               .sQItemAnswer.qQItemText(v-if="item.answer && item.answer.length>0") {{item.answer}}
