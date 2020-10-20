@@ -29,7 +29,7 @@ block content
               .sQitemHead()
                 .sQitemTime
                   span {{getQTime(item.date)}}
-                  span.sQitemLike(v-bind:class="{myLike:isMyLike(item)}" v-on:click="qLike(item)" style="margin-left:10px") Like {{item.likes}}
+                  span.sQitemLike(v-bind:class="{myLike:isMyLike(item)}"  style="margin-left:10px") Like {{item.likes}}
                 .sQitemTime(style="cursor:pointer; color:green" v-on:click="qToSpk(item)")
                   span(v-if="item.isSpk") Убрать от модератора
                   span(v-else) Показать модератору
