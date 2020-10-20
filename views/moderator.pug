@@ -23,7 +23,7 @@ block content
           h4 &nbsp;
           h4 Questions from participants
   .qContainer(v-bind:style="{opacity:opacity}")#app
-          h4 Вопросы  ({{if(quests) quests.filter(q=>{return q.isDeleted}).length}})
+          h4 Вопросы  ({{quests.filter(function(q){return q.isDeleted}).length}})
           .sPanelBody#qDiv
             .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false" v-bind:class="{isSpk:item.isSpk}")
               .sQitemHead()
