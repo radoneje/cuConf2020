@@ -21,7 +21,7 @@ block content
               img(src="/img/logo3.svg")
           h1  !{session.titleen}
           h4 &nbsp;
-          h4 Вопросы
+          h4 Questions asked by participants
   .qContainer(v-bind:style="{opacity:opacity}")#app
           .sPanelBody#qDiv
             .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false && item.isSpk")
