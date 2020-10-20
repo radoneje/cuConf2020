@@ -23,7 +23,6 @@ block content
           h4 &nbsp;
           h4 Questions for translator
   .qContainer(v-bind:style="{opacity:opacity}")#app
-          h4 Вопросы  ({{quests.length}})
           .sPanelBody#qDiv
             .sQitem(v-for="item in quests" :key="item.id" v-if="item.isDeleted==false" v-bind:class="{isSpk:item.isSpk}")
               .sQitemHead()
