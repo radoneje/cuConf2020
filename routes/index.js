@@ -34,7 +34,7 @@ router.get('/questions/:code', async function(req, res, next) {
   if(r.length==0)
     return res.sendStatus(404).send("no code")
 
-  res.render('questions', {title:"questions", session:r[0],lang:lang["rus"]});
+  res.render('questions', {title:"questions", session:r[0],lang:lang["eng"]});
 });
 
 router.get('/moderator/:code', async function(req, res, next) {
