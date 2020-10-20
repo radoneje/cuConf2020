@@ -17,9 +17,8 @@ block content
                   span {{getQTime(item.date)}}
                   span.sQitemLike(v-bind:class="{myLike:isMyLike(item)}" v-on:click="qLike(item)" style="margin-left:10px") Like {{item.likes}}
                 .sQitemTime(style="cursor:pointer; color:green" v-on:click="qToSpk(item)")
-                  span(v-if="item.isSpk") Убрать от модератора
-                  span(v-else) Показать модератору
-                .sQitemTime(style="cursor:pointer; color:red" v-on:click="qDelete(item)") Удалить
               .sQItemText.qQItemText {{item.text}}
-              .sQItemAnswer(v-if="item.answer")
-                textarea(readonly="readonly" :id="'qAnsw'+item.id" v-model="item.answer" v-on:change="saveAnswer(item)" placeholder="перевод")
+              .sQitemHead(v-if="!item.answer")
+                .sQitemTime(style="cursor:pointer; color:green" v-on:click="addAnswer(item)") перевод
+              .sQItemAnswer(v-else)
+                textarea( :id="'qAnsw'+item.id" v-model="item.answer" v-on:change="saveAnswer(item)" placeholder="перевод")

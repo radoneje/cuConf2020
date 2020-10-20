@@ -37,6 +37,15 @@ router.get('/questions/:code', async function(req, res, next) {
   res.render('questions', {title:"questions", session:r[0],lang:lang["eng"]});
 });
 
+router.get('/translator/:code', async function(req, res, next) {
+  var r=await req.knex.select("*").from("t_sessions").where({code:req.params.code});
+  if(r.length==0)
+    return res.sendStatus(404).send("no code")
+
+  res.render('translator', {title:"translator", session:r[0],lang:lang["eng"]});
+});
+
+
 router.get('/moderator/:code', async function(req, res, next) {
   var r=await req.knex.select("*").from("t_sessions").where({code:req.params.code});
   if(r.length==0)
