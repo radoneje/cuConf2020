@@ -64,7 +64,18 @@ router.get('/title/:code', async function(req, res, next) {
   mod.forEach(m=>{
     spk.push(m);
   })
-  res.json(spk);
+  var ret=[];
+  spk.forEach(s=>{
+    ret.push({name:s.nameru, pos:s.positionru})
+    ret.push({name:s.nameen, pos:s.positionen})
+  })
+
+  const { convertArrayToCSV } = require('convert-array-to-csv');
+  const csvFromArrayOfObjects = convertArrayToCSV(dataObjects);
+
+  res.set('Content-Type', 'application/octet-stream');
+  res.send(csvFromArrayOfObjects);
+  //res.json(ret);
 });
 
 
