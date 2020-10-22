@@ -54,6 +54,19 @@ router.get('/moderator/:code', async function(req, res, next) {
   res.render('moderator', {title:"questions", session:r[0],lang:lang["eng"]});
 });
 
+router.get('/title/:code', async function(req, res, next) {
+  var r=await req.knex.select("*").from("t_sessions").where({code:req.params.code});
+  if(r.length==0)
+    return res.sendStatus(404).send("no code")
+  var session=r[0];
+  var mod = await req.knex.select("*").from("v_modtosess").where({sessionid:session.id});
+  var spk=await req.knex.select("*").from("v_spktosess").where({sessionid:session.id});
+  mod.forEach(m=>{
+    spk.push(m);
+  })
+  res.json(spk);
+});
+
 
 function checkAdminLogin(req, res, next){
  if(!req.session.admin)
