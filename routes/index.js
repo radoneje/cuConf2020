@@ -71,7 +71,7 @@ router.get('/title/:code', async function(req, res, next) {
   })
 
   const { convertArrayToCSV } = require('convert-array-to-csv');
-  const csvFromArrayOfObjects = convertArrayToCSV(dataObjects);
+  const csvFromArrayOfObjects = convertArrayToCSV(ret);
 
   res.set('Content-Type', 'application/octet-stream');
   res.send(csvFromArrayOfObjects);
