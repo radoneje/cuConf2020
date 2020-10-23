@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return moment(date).format('HH:mm');
             },
             updateQ:async function(){
+                return;
                 try {
                     var res = await axios.get("/api/q/" + session.id,)
                     res.data.forEach(q => {
