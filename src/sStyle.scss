@@ -20,7 +20,10 @@ $purpure:#8A0250;
   display: flex;
 }
 .sL{
-  width: calc(75%);
+  //width: calc(75%);
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 .sL h4{
   padding: 0 20px ;
@@ -31,6 +34,7 @@ $purpure:#8A0250;
   position: fixed;
   right: 0;
   top: 0;
+  display: none;
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,.3);
 }
 .videoWrapper {
